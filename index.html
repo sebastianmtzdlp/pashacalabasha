@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://pashacalabasha.com/">
 <meta property="og:type" content="website">
@@ -36,6 +37,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+main section[id]{scroll-margin-top:72px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 1.0625rem/1.65 var(--sans);-webkit-font-smoothing:antialiased}
 img{display:block;width:100%;height:auto;background:var(--line)}
@@ -127,8 +129,8 @@ dialog button{position:absolute;top:14px;right:18px;background:none;border:0;col
 <body>
 
 <header class="nav">
-  <a href="#top">Pasha Calabasha</a>
-  <nav><a href="#cascada">Cascada</a><a href="#templos">Templos</a><a href="#familia">Familia</a><a href="#sobre">Sobre mí</a><a href="#contacto">Contacto</a></nav>
+  <a href="/">Pasha Calabasha</a>
+  <nav><a href="/cascada">Cascada</a><a href="/templos">Templos</a><a href="/familia">Familia</a><a href="/sobre">Sobre mí</a><a href="/contacto">Contacto</a></nav>
 </header>
 
 <main id="top">
@@ -169,7 +171,7 @@ dialog button{position:absolute;top:14px;right:18px;background:none;border:0;col
 </section>
 
 <!-- PUEBLO -->
-<section class="serie" id="pueblo">
+<section class="serie" id="coatepec">
   <div class="head"><h2>Coatepec</h2><p>El pueblo desde arriba y a nivel de calle.</p></div>
   <div class="stack">
     <figure class="full"><img src="img/6462.jpg" width="1600" height="1066" loading="lazy" alt="Vista de Coatepec con un cerro al fondo"></figure>
@@ -308,6 +310,44 @@ dialog button{position:absolute;top:14px;right:18px;background:none;border:0;col
       document.querySelector('#familia .head p').textContent='Un fin de semana en Coatepec, con la gente que quiero.';
     }catch(x){err.textContent='No se pudieron cargar las fotos. Intenta de nuevo.';b.disabled=false}
   });
+})();
+
+/* URLs limpias: cada sección vive en /seccion (p. ej. /familia) pero es la misma página.
+   Las carpetas /seccion/ solo redirigen aquí con ?s=seccion; aquí se pone la URL bonita y se baja a la sección. */
+(function(){
+  var ids=[].map.call(document.querySelectorAll('main section[id]'),function(x){return x.id});
+  var alias={pueblo:'coatepec','sobre-mi':'sobre',top:''};
+  function norm(s){s=(s||'').replace(/^[\/#]+|\/+$/g,'').toLowerCase();if(s in alias)s=alias[s];return ids.indexOf(s)>-1?s:''}
+  function path(s){return '/'+s}
+  function go(s,smooth){
+    var el=s&&document.getElementById(s);
+    if(el)el.scrollIntoView({behavior:smooth?'smooth':'auto'});else window.scrollTo({top:0,behavior:smooth?'smooth':'auto'});
+  }
+  var q=new URLSearchParams(location.search).get('s');
+  var start=norm(q)||norm(location.hash)||norm(location.pathname);
+  if(q!==null||location.hash||location.pathname!==path(start))history.replaceState(null,'',path(start));
+  if(start){if('scrollRestoration' in history)history.scrollRestoration='manual';go(start,false);addEventListener('load',function(){if(Date.now()<lock)go(start,false)})}
+
+  var lock=Date.now()+1500,cur=start;
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="/"]');if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;
+    var s=norm(a.getAttribute('href'));if(s===''&&a.getAttribute('href')!=='/')return;
+    e.preventDefault();cur=s;if(location.pathname!==path(s))history.pushState(null,'',path(s));
+    lock=Date.now()+1200;go(s,true);
+  });
+  addEventListener('popstate',function(){cur=norm(location.pathname);go(cur,true)});
+
+  /* al hacer scroll, la URL sigue a la sección que está en pantalla */
+  var secs=ids.map(function(i){return document.getElementById(i)}),t;
+  addEventListener('scroll',function(){
+    clearTimeout(t);t=setTimeout(function(){
+      if(Date.now()<lock)return;
+      var mid=innerHeight*.35,s='';
+      secs.forEach(function(el){if(el.getBoundingClientRect().top<=mid)s=el.id});
+      if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)s=ids[ids.length-1];
+      if(s!==cur){cur=s;history.replaceState(null,'',path(s))}
+    },120);
+  },{passive:true});
 })();
 </script>
 </body>
