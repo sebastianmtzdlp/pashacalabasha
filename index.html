@@ -9,7 +9,7 @@
 <meta property="og:locale" content="es_MX">
 <meta property="og:url" content="https://pashacalabasha.com/">
 <meta property="og:title" content="Pasha Calabasha — Fotografía">
-<meta property="og:description" content="Portafolio de fotografía. Coatepec, Veracruz.">
+<meta property="og:description" content="Portafolio de fotografía de Pasha Calabasha. Coatepec, Veracruz.">
 <meta property="og:image" content="https://pashacalabasha.com/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -37,7 +37,6 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-main section[id]{scroll-margin-top:72px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 1.0625rem/1.65 var(--sans);-webkit-font-smoothing:antialiased}
 img{display:block;width:100%;height:auto;background:var(--line)}
@@ -119,6 +118,28 @@ footer{padding:0 var(--gut) 32px;color:var(--muted);font-size:.85rem}
 #fam-grid figure{break-inside:avoid;margin:0 0 clamp(8px,1.6vw,24px)}
 @media(max-width:700px){#fam-grid{columns:1}}
 
+/* páginas */
+.nav a{white-space:nowrap}
+.nav a[aria-current]{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:620px){.nav{font-size:.85rem;padding-top:16px}.nav nav{gap:.9rem}.nav nav .n-series,.nav nav .n-sobre{display:none}}
+.page{padding-top:clamp(104px,14vw,170px)}
+.page>.serie{padding-bottom:clamp(56px,8vw,120px)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,3vw,48px) clamp(16px,2vw,32px);padding:0 var(--gut) clamp(72px,12vw,160px)}
+.card a{display:block;text-decoration:none}
+.card img,.card .priv{aspect-ratio:4/5;object-fit:cover}
+.card .priv{display:grid;place-items:center;background:var(--line);color:var(--muted);font:300 1.4rem var(--serif);font-style:italic}
+.card h3{margin:14px 0 4px;font:300 clamp(1.6rem,2.6vw,2.2rem)/1.1 var(--serif);letter-spacing:-.01em}
+.card p{margin:0;color:var(--muted);font-size:.95rem}
+.card a:hover h3{color:var(--moss)}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.next{display:flex;justify-content:space-between;gap:16px;padding:28px var(--gut) clamp(56px,8vw,110px);border-top:1px solid var(--line)}
+.next a{text-decoration:none;font:300 clamp(1.3rem,2.4vw,2rem)/1.2 var(--serif)}
+.next a:hover{color:var(--moss)}
+.next span{display:block;font:400 .85rem var(--sans);color:var(--muted)}
+.next .sig{text-align:right;margin-left:auto}
+.page>.about,.page>.contact{border-top:0}
+
 /* lightbox */
 dialog{border:0;padding:0;background:transparent;max-width:100vw;max-height:100svh;width:100vw;height:100svh}
 dialog::backdrop{background:rgba(10,10,8,.94)}
@@ -130,10 +151,10 @@ dialog button{position:absolute;top:14px;right:18px;background:none;border:0;col
 
 <header class="nav">
   <a href="/">Pasha Calabasha</a>
-  <nav><a href="/cascada">Cascada</a><a href="/templos">Templos</a><a href="/familia">Familia</a><a href="/sobre">Sobre mí</a><a href="/contacto">Contacto</a></nav>
+  <nav><a href="/" class="n-series">Series</a><a href="/familia">Familia</a><a href="/sobre" class="n-sobre">Sobre mí</a><a href="/contacto">Contacto</a></nav>
 </header>
 
-<main id="top">
+<main>
 <div class="hero">
   <img src="img/6071.jpg" alt="Dos zopilotes sobre una rama cubierta de bromelias, sobre la selva de Coatepec" fetchpriority="high">
   <p>Fotografía desde Coatepec, Veracruz</p>
@@ -144,131 +165,19 @@ dialog button{position:absolute;top:14px;right:18px;background:none;border:0;col
   <p>Un viaje corto a las montañas de Veracruz, mirado despacio: agua, selva, iglesias azules y lo que pasa a la orilla de la carretera.</p>
 </div>
 
-<!-- CASCADA -->
-<section class="serie" id="cascada">
-  <div class="head"><h2>Cascada</h2><p>Niebla, roca volcánica y el ruido constante del agua.</p></div>
-  <div class="stack">
-    <div class="duo off">
-      <figure><img src="img/5961.jpg" width="1066" height="1600" loading="lazy" alt="Cascada entre la niebla y la selva"></figure>
-      <figure><img src="img/5983.jpg" width="1066" height="1600" loading="lazy" alt="Cascada vista desde abajo con el cañón cubierto de musgo"></figure>
-    </div>
-    <div class="solo"><figure><img src="img/5985.jpg" width="1143" height="1600" loading="lazy" alt="Caída de agua blanca contra la pared del cañón"></figure></div>
-    <figure class="full"><img src="img/5956.jpg" width="1600" height="1066" loading="lazy" alt="Cascada que se abre entre la vegetación"></figure>
-  </div>
-</section>
-
-<!-- SELVA -->
-<section class="serie" id="selva">
-  <div class="head"><h2>Selva</h2><p>Desde un mirador, la copa de los árboles y los zopilotes que la vigilan.</p></div>
-  <div class="stack">
-    <figure class="full"><img src="img/5991.jpg" width="1600" height="1066" loading="lazy" alt="Selva densa bajo cielo nublado"></figure>
-    <div class="duo">
-      <figure><img src="img/5998.jpg" width="1066" height="1600" loading="lazy" alt="Zopilote posado en un tronco con bromelias"></figure>
-      <figure><img src="img/6000.jpg" width="1066" height="1600" loading="lazy" alt="Dos zopilotes en lo alto del tronco"></figure>
-    </div>
-    <figure class="full"><img src="img/6181.jpg" width="1600" height="1066" loading="lazy" alt="Zopilotes sobre una rama inclinada frente a la selva"></figure>
-  </div>
-</section>
-
-<!-- PUEBLO -->
-<section class="serie" id="coatepec">
-  <div class="head"><h2>Coatepec</h2><p>El pueblo desde arriba y a nivel de calle.</p></div>
-  <div class="stack">
-    <figure class="full"><img src="img/6462.jpg" width="1600" height="1066" loading="lazy" alt="Vista de Coatepec con un cerro al fondo"></figure>
-    <div class="solo l"><figure><img src="img/6530.jpg" width="1066" height="1600" loading="lazy" alt="Torre amarilla de una iglesia con cúpula roja"></figure></div>
-    <div class="duo">
-      <figure><img src="img/6473.jpg" width="1600" height="1066" loading="lazy" alt="Árboles de flamboyán entre la selva"></figure>
-      <figure><img src="img/6489.jpg" width="1600" height="1066" loading="lazy" alt="Tejados del pueblo entre árboles"></figure>
-    </div>
-    <figure class="full"><img src="img/6531.jpg" width="1600" height="1066" loading="lazy" alt="Fachada de la iglesia amarilla y roja bajo un cielo con nubes"></figure>
-  </div>
-</section>
-
-<!-- TEMPLOS -->
-<section class="serie" id="templos">
-  <div class="head"><h2>Templos</h2><p>Azul, dorado y luz de media mañana en las iglesias del camino.</p></div>
-  <div class="stack">
-    <div class="duo">
-      <figure><img src="img/6674.jpg" width="1066" height="1600" loading="lazy" alt="Nave de una iglesia con columnas azules y piso de mosaico"></figure>
-      <figure><img src="img/6680.jpg" width="900" height="1600" loading="lazy" alt="Bóveda decorada vista desde abajo"></figure>
-    </div>
-    <figure class="full"><img src="img/6683.jpg" width="1600" height="1066" loading="lazy" alt="Cúpula y arcos de una iglesia pintada de azul grisáceo"></figure>
-    <figure class="full"><img src="img/6687.jpg" width="1600" height="1066" loading="lazy" alt="Rosetón del techo con pinturas florales"></figure>
-    <div class="duo off">
-      <figure><img src="img/6697.jpg" width="1066" height="1600" loading="lazy" alt="Altar con flores blancas"></figure>
-      <figure><img src="img/6704.jpg" width="1066" height="1600" loading="lazy" alt="Nave principal vista desde el altar hacia la entrada"></figure>
-    </div>
-    <div class="duo">
-      <figure><img src="img/6709.jpg" width="1600" height="1066" loading="lazy" alt="Altar con mantel blanco y flores"></figure>
-      <figure><img src="img/6715.jpg" width="1066" height="1600" loading="lazy" alt="Fachada blanca con detalles azules"></figure>
-    </div>
-    <figure class="full"><img src="img/6726.jpg" width="1600" height="1066" loading="lazy" alt="Iglesia amarilla con cúpula roja"></figure>
-  </div>
-</section>
-
-<!-- PEQUEÑAS COSAS -->
-<section class="serie" id="detalles">
-  <div class="head"><h2>Cosas pequeñas</h2><p>Mariposas, una oruga, vacas y un ave sola en el cielo.</p></div>
-  <div class="stack">
-    <div class="duo off">
-      <figure><img src="img/i6825.jpg" width="900" height="1600" loading="lazy" alt="Mariposa 88 sobre una pared blanca"></figure>
-      <figure><img src="img/6412.jpg" width="1066" height="1600" loading="lazy" alt="Ave en vuelo contra las nubes"></figure>
-    </div>
-    <div class="duo">
-      <figure><img src="img/6276.jpg" width="1600" height="1066" loading="lazy" alt="Vaca negra pastando"></figure>
-      <figure><img src="img/6284.jpg" width="1600" height="1066" loading="lazy" alt="Vaca café de perfil en el potrero"></figure>
-    </div>
-    <div class="duo">
-      <figure><img src="img/6294.jpg" width="1600" height="1066" loading="lazy" alt="Mariposa negra sobre el tronco de un árbol"></figure>
-      <figure><img src="img/6442.jpg" width="1600" height="1066" loading="lazy" alt="Oruga verde sobre ramas secas"></figure>
-    </div>
-    <div class="solo"><figure><img src="img/6435.jpg" width="1600" height="1066" loading="lazy" alt="Hortensia azul en la tierra"></figure></div>
-  </div>
-</section>
-
-<!-- CARRETERA -->
-<section class="serie" id="carretera">
-  <div class="head"><h2>Carretera</h2><p>El camino de ida y vuelta.</p></div>
-  <div class="stack">
-    <figure class="full"><img src="img/5923.jpg" width="1600" height="1066" loading="lazy" alt="Campo y montañas desde la carretera"></figure>
-    <div class="duo">
-      <figure><img src="img/5933.jpg" width="1600" height="1066" loading="lazy" alt="Volcán entre nubes visto desde el espejo del coche"></figure>
-      <figure><img src="img/6757.jpg" width="1066" height="1600" loading="lazy" alt="Capilla de piedra con una cruz turquesa"></figure>
-    </div>
-    <figure class="full"><img src="img/6751.jpg" width="1600" height="1066" loading="lazy" alt="Gasolinera con una montaña al fondo"></figure>
-    <figure class="full"><img src="img/6759.jpg" width="1600" height="1066" loading="lazy" alt="Pipa estacionada en la gasolinera"></figure>
-  </div>
-</section>
-
-<!-- FAMILIA (privada: fotos cifradas en /privado) -->
-<section class="serie" id="familia">
-  <div class="head"><h2>Familia</h2><p>Esta serie es privada. Escribe la contraseña para verla.</p></div>
-  <div class="lock" id="lock">
-    <form id="lockform" autocomplete="off">
-      <label for="pw" class="sr" style="position:absolute;left:-9999px">Contraseña</label>
-      <input id="pw" type="password" placeholder="Contraseña" required>
-      <button type="submit">Ver fotos</button>
-    </form>
-    <p class="err" id="err" role="alert"></p>
-  </div>
-  <div id="fam-grid"></div>
-</section>
-
-<section class="about" id="sobre">
-  <h2>Sobre mí</h2>
-  <div>
-    <p>Soy Pasha, fotógrafo de la Ciudad de México. Fotografío viajes, familia y lo que se cruza en el camino, casi siempre con luz natural y con tiempo para mirar.</p>
-    <p>Esta página reúne lo más reciente: un viaje a Coatepec, Veracruz. También dirijo CIMA Vision, una agencia de fotografía y consultoría de imagen para equipos y marcas personales.</p>
-  </div>
-</section>
-
-<section class="contact" id="contacto">
-  <a class="big" href="mailto:pashacalabasha@gmail.com">pashacalabasha@gmail.com</a>
-  <ul>
-    <li><a href="https://instagram.com/PashaCalabasha" rel="noopener">Instagram @PashaCalabasha</a></li>
-    <li><a href="https://cimavision.co" rel="noopener">Proyectos de marca y equipos: CIMA Vision</a></li>
-  </ul>
-</section>
+<div class="grid">
+<article class="card"><a href="/cascada"><img src="img/5961.jpg" alt="Cascada entre la niebla y la selva" loading="lazy"><h3>Cascada</h3><p>Niebla, roca volcánica y el ruido constante del agua.</p></a></article>
+<article class="card"><a href="/selva"><img src="img/5991.jpg" alt="Selva densa bajo cielo nublado" loading="lazy"><h3>Selva</h3><p>Desde un mirador, la copa de los árboles y los zopilotes que la vigilan.</p></a></article>
+<article class="card"><a href="/coatepec"><img src="img/6462.jpg" alt="Vista de Coatepec con un cerro al fondo" loading="lazy"><h3>Coatepec</h3><p>El pueblo desde arriba y a nivel de calle.</p></a></article>
+<article class="card"><a href="/templos"><img src="img/6674.jpg" alt="Nave de una iglesia con columnas azules y piso de mosaico" loading="lazy"><h3>Templos</h3><p>Azul, dorado y luz de media mañana en las iglesias del camino.</p></a></article>
+<article class="card"><a href="/detalles"><img src="img/i6825.jpg" alt="Mariposa 88 sobre una pared blanca" loading="lazy"><h3>Cosas pequeñas</h3><p>Mariposas, una oruga, vacas y un ave sola en el cielo.</p></a></article>
+<article class="card"><a href="/carretera"><img src="img/5923.jpg" alt="Campo y montañas desde la carretera" loading="lazy"><h3>Carretera</h3><p>El camino de ida y vuelta.</p></a></article>
+<article class="card"><a href="/familia"><div class="priv">Serie privada</div><h3>Familia</h3><p>Con contraseña.</p></a></article>
+</div>
+<script>
+/* enlaces viejos (#familia, ?s=familia) llevan a la página nueva */
+(function(){var s=(new URLSearchParams(location.search).get("s")||location.hash.slice(1)).toLowerCase();s={pueblo:"coatepec",faq:"contacto","sobre-mi":"sobre"}[s]||s;if(["cascada", "selva", "coatepec", "templos", "detalles", "carretera", "familia", "sobre", "contacto"].indexOf(s)>-1)location.replace("/"+s)})();
+</script>
 </main>
 
 <footer>© 2026 Pasha Calabasha. Todas las fotografías son del autor.</footer>
@@ -282,73 +191,7 @@ dialog button{position:absolute;top:14px;right:18px;background:none;border:0;col
   });
   d.addEventListener('click',function(){d.close()});
 })();
-
-(function(){
-  var f=document.getElementById('lockform'),err=document.getElementById('err'),grid=document.getElementById('fam-grid');
-  var IT=310000;
-  function u8(b){return new Uint8Array(b)}
-  async function get(u){var r=await fetch(u);if(!r.ok)throw new Error('net');return u8(await r.arrayBuffer())}
-  async function dec(g,buf){return crypto.subtle.decrypt({name:'AES-GCM',iv:buf.slice(0,12)},g,buf.slice(12))}
-  f.addEventListener('submit',async function(e){
-    e.preventDefault();err.textContent='';var b=f.querySelector('button');b.disabled=true;
-    try{
-      var salt=await get('privado/k');
-      var km=await crypto.subtle.importKey('raw',new TextEncoder().encode(document.getElementById('pw').value),'PBKDF2',false,['deriveKey']);
-      var key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:salt,iterations:IT,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
-      var man;
-      try{man=JSON.parse(new TextDecoder().decode(await dec(key,await get('privado/m.enc'))))}
-      catch(x){err.textContent='Contraseña incorrecta.';b.disabled=false;return}
-      var items=await Promise.all(man.map(async function(m){
-        var plain=await dec(key,await get('privado/'+m.f));
-        return {u:URL.createObjectURL(new Blob([plain],{type:'image/jpeg'})),w:m.w,h:m.h}}));
-      items.forEach(function(it){
-        var fig=document.createElement('figure'),im=new Image();
-        im.src=it.u;im.width=it.w;im.height=it.h;im.alt='Foto familiar';im.loading='lazy';
-        fig.appendChild(im);fig.addEventListener('click',function(){var d=document.getElementById('lb');d.querySelector('img').src=it.u;d.querySelector('img').alt='Foto familiar';d.showModal()});
-        grid.appendChild(fig)});
-      document.getElementById('lock').style.display='none';
-      document.querySelector('#familia .head p').textContent='Un fin de semana en Coatepec, con la gente que quiero.';
-    }catch(x){err.textContent='No se pudieron cargar las fotos. Intenta de nuevo.';b.disabled=false}
-  });
-})();
-
-/* URLs limpias: cada sección vive en /seccion (p. ej. /familia) pero es la misma página.
-   Las carpetas /seccion/ solo redirigen aquí con ?s=seccion; aquí se pone la URL bonita y se baja a la sección. */
-(function(){
-  var ids=[].map.call(document.querySelectorAll('main section[id]'),function(x){return x.id});
-  var alias={pueblo:'coatepec','sobre-mi':'sobre',top:''};
-  function norm(s){s=(s||'').replace(/^[\/#]+|\/+$/g,'').toLowerCase();if(s in alias)s=alias[s];return ids.indexOf(s)>-1?s:''}
-  function path(s){return '/'+s}
-  function go(s,smooth){
-    var el=s&&document.getElementById(s);
-    if(el)el.scrollIntoView({behavior:smooth?'smooth':'auto'});else window.scrollTo({top:0,behavior:smooth?'smooth':'auto'});
-  }
-  var q=new URLSearchParams(location.search).get('s');
-  var start=norm(q)||norm(location.hash)||norm(location.pathname);
-  if(q!==null||location.hash||location.pathname!==path(start))history.replaceState(null,'',path(start));
-  if(start){if('scrollRestoration' in history)history.scrollRestoration='manual';go(start,false);addEventListener('load',function(){if(Date.now()<lock)go(start,false)})}
-
-  var lock=Date.now()+1500,cur=start;
-  document.addEventListener('click',function(e){
-    var a=e.target.closest('a[href^="/"]');if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;
-    var s=norm(a.getAttribute('href'));if(s===''&&a.getAttribute('href')!=='/')return;
-    e.preventDefault();cur=s;if(location.pathname!==path(s))history.pushState(null,'',path(s));
-    lock=Date.now()+1200;go(s,true);
-  });
-  addEventListener('popstate',function(){cur=norm(location.pathname);go(cur,true)});
-
-  /* al hacer scroll, la URL sigue a la sección que está en pantalla */
-  var secs=ids.map(function(i){return document.getElementById(i)}),t;
-  addEventListener('scroll',function(){
-    clearTimeout(t);t=setTimeout(function(){
-      if(Date.now()<lock)return;
-      var mid=innerHeight*.35,s='';
-      secs.forEach(function(el){if(el.getBoundingClientRect().top<=mid)s=el.id});
-      if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)s=ids[ids.length-1];
-      if(s!==cur){cur=s;history.replaceState(null,'',path(s))}
-    },120);
-  },{passive:true});
-})();
 </script>
+
 </body>
 </html>

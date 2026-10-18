@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://pashacalabasha.com/selva">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://pashacalabasha.com/selva">
+<meta property="og:title" content="Selva — Pasha Calabasha">
+<meta property="og:description" content="Desde un mirador, la copa de los árboles y los zopilotes que la vigilan.">
+<meta property="og:image" content="https://pashacalabasha.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Dos zopilotes sobre una rama frente a la selva de Coatepec">
+<meta name="twitter:card" content="summary_large_image">
+<title>Selva — Pasha Calabasha</title>
+<meta name="description" content="Desde un mirador, la copa de los árboles y los zopilotes que la vigilan.">
+<link rel="preload" href="fonts/fraunces-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:Fraunces;font-weight:300;font-style:normal;font-display:swap;src:url(fonts/fraunces-latin-300-normal.woff2) format("woff2")}
+@font-face{font-family:Fraunces;font-weight:300;font-style:italic;font-display:swap;src:url(fonts/fraunces-latin-300-italic.woff2) format("woff2")}
+@font-face{font-family:Fraunces;font-weight:400;font-style:normal;font-display:swap;src:url(fonts/fraunces-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Fraunces;font-weight:400;font-style:italic;font-display:swap;src:url(fonts/fraunces-latin-400-italic.woff2) format("woff2")}
+@font-face{font-family:"Instrument Sans";font-weight:400;font-display:swap;src:url(fonts/instrument-sans-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Instrument Sans";font-weight:500;font-display:swap;src:url(fonts/instrument-sans-latin-500-normal.woff2) format("woff2")}
+
+:root{
+  --paper:#f3f0e9; --ink:#1c1b19; --muted:#6d685f; --line:#d9d4c8;
+  --moss:#3f4a2c;
+  --gut:clamp(16px,4vw,56px);
+  --serif:Fraunces,Georgia,serif; --sans:"Instrument Sans",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#141412;--ink:#ece8de;--muted:#9a958a;--line:#2b2a26;--moss:#a9b88a}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.0625rem/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+img{display:block;width:100%;height:auto;background:var(--line)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--moss);outline-offset:3px}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:10;display:flex;justify-content:space-between;padding:20px var(--gut);color:#fff;mix-blend-mode:difference;font-size:.95rem}
+.nav a{text-decoration:none}
+.nav nav{display:flex;gap:1.6rem}
+.nav a:hover{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:620px){.nav nav a:not(:last-child){display:none}}
+
+/* hero */
+.hero{position:relative;height:100svh;min-height:520px;overflow:hidden;color:#fff}
+.hero img{position:absolute;inset:0;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,8,.62),rgba(10,10,8,0) 55%)}
+.hero h1{position:absolute;z-index:2;left:var(--gut);right:var(--gut);bottom:clamp(24px,6vh,64px);margin:0;font:300 clamp(3.2rem,13vw,11rem)/.9 var(--serif);letter-spacing:-.025em}
+.hero p{position:absolute;z-index:2;right:var(--gut);bottom:calc(clamp(24px,6vh,64px) + clamp(3.2rem,13vw,11rem) + 14px);margin:0;font-size:.95rem;max-width:22ch;text-align:right}
+@media(max-width:620px){.hero p{left:var(--gut);right:auto;text-align:left}}
+
+/* intro */
+.intro{padding:clamp(72px,14vw,200px) var(--gut);display:grid;grid-template-columns:repeat(12,1fr);gap:0 24px}
+.intro p{grid-column:4/12;margin:0;font:300 clamp(1.6rem,3.6vw,3rem)/1.25 var(--serif);letter-spacing:-.01em}
+.intro p em{color:var(--moss)}
+@media(max-width:800px){.intro p{grid-column:1/-1}}
+
+/* series */
+.serie{padding-bottom:clamp(72px,12vw,180px)}
+.head{padding:0 var(--gut) clamp(24px,4vw,56px);display:grid;grid-template-columns:repeat(12,1fr);gap:8px 24px;align-items:baseline}
+.head h2{grid-column:1/8;margin:0;font:300 clamp(2.2rem,6vw,5rem)/1 var(--serif);letter-spacing:-.02em}
+.head p{grid-column:8/13;margin:0;color:var(--muted);font-size:.98rem;max-width:42ch}
+@media(max-width:800px){.head h2,.head p{grid-column:1/-1}}
+
+figure{margin:0;cursor:zoom-in}
+figcaption{padding:10px var(--gut) 0;font-size:.85rem;color:var(--muted)}
+.full img{max-height:96svh;object-fit:cover}
+.pad{padding:0 var(--gut)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1.6vw,24px);padding:0 var(--gut)}
+.duo figcaption{padding-left:0}
+.duo.off figure:nth-child(2){margin-top:clamp(40px,10vw,160px)}
+.solo{display:grid;grid-template-columns:repeat(12,1fr);padding:0 var(--gut)}
+.solo figure{grid-column:4/10}
+.solo.l figure{grid-column:1/7}
+.solo.r figure{grid-column:7/13}
+.solo figcaption{padding-left:0}
+.stack>*+*{margin-top:clamp(8px,1.6vw,24px)}
+section.serie .stack{display:flex;flex-direction:column;gap:clamp(8px,1.6vw,24px)}
+section.serie .stack>*+*{margin-top:0}
+.stack{gap:clamp(28px,6vw,96px)!important}
+@media(max-width:700px){
+  .duo{grid-template-columns:1fr}
+  .duo.off figure:nth-child(2){margin-top:0}
+  .solo figure,.solo.l figure,.solo.r figure{grid-column:1/-1}
+}
+
+/* about + contact */
+.about{padding:clamp(64px,10vw,140px) var(--gut);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(12,1fr);gap:32px 24px}
+.about h2{grid-column:1/5;margin:0;font:300 clamp(1.8rem,3.4vw,2.8rem)/1.1 var(--serif)}
+.about div{grid-column:5/12;max-width:58ch}
+.about p{margin:0 0 1.1em}
+.contact{padding:clamp(48px,8vw,120px) var(--gut) 40px;border-top:1px solid var(--line)}
+.contact a.big{display:inline-block;font:300 clamp(1.6rem,6vw,5rem)/1.05 var(--serif);letter-spacing:-.02em;text-decoration:none;border-bottom:1px solid currentColor}
+.contact a.big:hover{color:var(--moss)}
+.contact ul{list-style:none;margin:2rem 0 0;padding:0;display:flex;gap:2rem;flex-wrap:wrap}
+footer{padding:0 var(--gut) 32px;color:var(--muted);font-size:.85rem}
+@media(max-width:800px){.about h2,.about div{grid-column:1/-1}}
+
+
+/* familia (privada) */
+.lock{padding:0 var(--gut)}
+.lock form{display:flex;gap:12px;flex-wrap:wrap;align-items:center;max-width:520px}
+.lock input{flex:1 1 220px;font:inherit;padding:.8em 1em;border:1px solid var(--ink);background:transparent;color:var(--ink);border-radius:0}
+.lock button{font:500 1rem var(--sans);padding:.85em 1.6em;background:var(--ink);color:var(--paper);border:0;cursor:pointer}
+.lock button:disabled{opacity:.5;cursor:wait}
+.lock .err{color:#a33a2a;margin:.8em 0 0;min-height:1.6em;font-size:.95rem}
+@media(prefers-color-scheme:dark){.lock .err{color:#e08a76}}
+#fam-grid{columns:2;column-gap:clamp(8px,1.6vw,24px);padding:0 var(--gut)}
+#fam-grid figure{break-inside:avoid;margin:0 0 clamp(8px,1.6vw,24px)}
+@media(max-width:700px){#fam-grid{columns:1}}
+
+/* páginas */
+.nav a{white-space:nowrap}
+.nav a[aria-current]{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:620px){.nav{font-size:.85rem;padding-top:16px}.nav nav{gap:.9rem}.nav nav .n-series,.nav nav .n-sobre{display:none}}
+.page{padding-top:clamp(104px,14vw,170px)}
+.page>.serie{padding-bottom:clamp(56px,8vw,120px)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,3vw,48px) clamp(16px,2vw,32px);padding:0 var(--gut) clamp(72px,12vw,160px)}
+.card a{display:block;text-decoration:none}
+.card img,.card .priv{aspect-ratio:4/5;object-fit:cover}
+.card .priv{display:grid;place-items:center;background:var(--line);color:var(--muted);font:300 1.4rem var(--serif);font-style:italic}
+.card h3{margin:14px 0 4px;font:300 clamp(1.6rem,2.6vw,2.2rem)/1.1 var(--serif);letter-spacing:-.01em}
+.card p{margin:0;color:var(--muted);font-size:.95rem}
+.card a:hover h3{color:var(--moss)}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.next{display:flex;justify-content:space-between;gap:16px;padding:28px var(--gut) clamp(56px,8vw,110px);border-top:1px solid var(--line)}
+.next a{text-decoration:none;font:300 clamp(1.3rem,2.4vw,2rem)/1.2 var(--serif)}
+.next a:hover{color:var(--moss)}
+.next span{display:block;font:400 .85rem var(--sans);color:var(--muted)}
+.next .sig{text-align:right;margin-left:auto}
+.page>.about,.page>.contact{border-top:0}
+
+/* lightbox */
+dialog{border:0;padding:0;background:transparent;max-width:100vw;max-height:100svh;width:100vw;height:100svh}
+dialog::backdrop{background:rgba(10,10,8,.94)}
+dialog img{position:absolute;inset:0;margin:auto;width:auto;height:auto;max-width:94vw;max-height:92svh;background:none}
+dialog button{position:absolute;top:14px;right:18px;background:none;border:0;color:#fff;font:400 1rem var(--sans);cursor:pointer;padding:8px}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a href="/">Pasha Calabasha</a>
+  <nav><a href="/" class="n-series">Series</a><a href="/familia">Familia</a><a href="/sobre" class="n-sobre">Sobre mí</a><a href="/contacto">Contacto</a></nav>
+</header>
+
+<main class="page">
+<section class="serie" id="selva">
+  <div class="head"><h2>Selva</h2><p>Desde un mirador, la copa de los árboles y los zopilotes que la vigilan.</p></div>
+  <div class="stack">
+    <figure class="full"><img src="img/5991.jpg" width="1600" height="1066" loading="lazy" alt="Selva densa bajo cielo nublado"></figure>
+    <div class="duo">
+      <figure><img src="img/5998.jpg" width="1066" height="1600" loading="lazy" alt="Zopilote posado en un tronco con bromelias"></figure>
+      <figure><img src="img/6000.jpg" width="1066" height="1600" loading="lazy" alt="Dos zopilotes en lo alto del tronco"></figure>
+    </div>
+    <figure class="full"><img src="img/6181.jpg" width="1600" height="1066" loading="lazy" alt="Zopilotes sobre una rama inclinada frente a la selva"></figure>
+  </div>
+</section>
+<nav class="next" aria-label="Más series"><a href="/cascada"><span>← Anterior</span>Cascada</a><a class="sig" href="/coatepec"><span>Siguiente →</span>Coatepec</a></nav>
+</main>
+
+<footer>© 2026 Pasha Calabasha. Todas las fotografías son del autor.</footer>
+
+<dialog id="lb" aria-label="Foto ampliada"><button type="button" aria-label="Cerrar">Cerrar</button><img alt=""></dialog>
+<script>
+(function(){
+  var d=document.getElementById('lb'),im=d.querySelector('img');
+  document.querySelectorAll('figure img').forEach(function(i){
+    i.closest('figure').addEventListener('click',function(){im.src=i.src;im.alt=i.alt;d.showModal()});
+  });
+  d.addEventListener('click',function(){d.close()});
+})();
+</script>
+
+</body>
+</html>
