@@ -123,7 +123,7 @@ footer{padding:0 var(--gut) 32px;color:var(--muted);font-size:.85rem}
 /* páginas */
 .nav a{white-space:nowrap}
 .nav a[aria-current]{text-decoration:underline;text-underline-offset:4px}
-@media(max-width:620px){.nav{font-size:.85rem;padding-top:16px}.nav nav{gap:.9rem}.nav nav .n-series,.nav nav .n-sobre{display:none}}
+@media(max-width:620px){.nav{font-size:.85rem;padding-top:16px}.nav nav{gap:.9rem}.nav nav .n-sobre,.nav nav a[href="/familia"]{display:none}}
 .page{padding-top:clamp(104px,14vw,170px)}
 .page>.serie{padding-bottom:clamp(56px,8vw,120px)}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,3vw,48px) clamp(16px,2vw,32px);padding:0 var(--gut) clamp(72px,12vw,160px)}
@@ -147,6 +147,10 @@ dialog{border:0;padding:0;background:transparent;max-width:100vw;max-height:100s
 dialog::backdrop{background:rgba(10,10,8,.94)}
 dialog img{position:absolute;inset:0;margin:auto;width:auto;height:auto;max-width:94vw;max-height:92svh;background:none}
 dialog button{position:absolute;top:14px;right:18px;background:none;border:0;color:#fff;font:400 1rem var(--sans);cursor:pointer;padding:8px}
+dialog .lb-flecha{top:50%;transform:translateY(-50%);font-size:2.4rem;line-height:1;padding:14px 18px}
+dialog .lb-ant{left:4px;right:auto}
+dialog .lb-sig{right:4px}
+dialog .lb-pie{position:absolute;left:0;right:0;bottom:14px;text-align:center;color:#d8d3c8;font:400 .9rem var(--sans);margin:0;padding:0 var(--gut)}
 </style>
 </head>
 <body>
@@ -180,14 +184,25 @@ dialog button{position:absolute;top:14px;right:18px;background:none;border:0;col
 
 <footer>© 2026 Pasha Calabasha. Todas las fotografías son del autor.</footer>
 
-<dialog id="lb" aria-label="Foto ampliada"><button type="button" aria-label="Cerrar">Cerrar</button><img alt=""></dialog>
+<dialog id="lb" aria-label="Foto ampliada"><button type="button" aria-label="Cerrar">Cerrar</button><button type="button" class="lb-flecha lb-ant" aria-label="Foto anterior">&#8249;</button><img alt=""><button type="button" class="lb-flecha lb-sig" aria-label="Foto siguiente">&#8250;</button><p class="lb-pie"></p></dialog>
 <script>
 (function(){
-  var d=document.getElementById('lb'),im=d.querySelector('img');
-  document.querySelectorAll('figure img').forEach(function(i){
-    i.closest('figure').addEventListener('click',function(){im.src=i.src;im.alt=i.alt;d.showModal()});
+  var d=document.getElementById('lb'),im=d.querySelector('img'),pie=d.querySelector('.lb-pie'),lista=[],n=0;
+  function ver(){var f=lista[n];im.src=f.src;im.alt=f.alt;pie.textContent=f.getAttribute('data-pie')||''}
+  /* la galería es todas las fotos de la página, en orden; también las de Familia, que llegan después */
+  document.addEventListener('click',function(e){
+    var f=e.target.closest&&e.target.closest('figure img');
+    if(!f)return;
+    lista=[].slice.call(document.querySelectorAll('figure img'));n=lista.indexOf(f);ver();d.showModal();
   });
-  d.addEventListener('click',function(){d.close()});
+  d.querySelector('.lb-ant').addEventListener('click',function(e){e.stopPropagation();n=(n-1+lista.length)%lista.length;ver()});
+  d.querySelector('.lb-sig').addEventListener('click',function(e){e.stopPropagation();n=(n+1)%lista.length;ver()});
+  d.addEventListener('click',function(e){if(e.target===d||e.target===im||e.target.tagName==='BUTTON'&&e.target.textContent==='Cerrar')d.close()});
+  document.addEventListener('keydown',function(e){
+    if(!d.open)return;
+    if(e.key==='ArrowLeft')d.querySelector('.lb-ant').click();
+    if(e.key==='ArrowRight')d.querySelector('.lb-sig').click();
+  });
 })();
 </script>
 

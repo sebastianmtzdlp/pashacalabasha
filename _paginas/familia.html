@@ -32,7 +32,7 @@
       items.forEach(function(it){
         var fig=document.createElement('figure'),im=new Image();
         im.src=it.u;im.width=it.w;im.height=it.h;im.alt='Foto familiar';im.loading='lazy';
-        fig.appendChild(im);fig.addEventListener('click',function(){var d=document.getElementById('lb');d.querySelector('img').src=it.u;d.querySelector('img').alt='Foto familiar';d.showModal()});
+        fig.appendChild(im);
         grid.appendChild(fig)});
       document.getElementById('lock').style.display='none';
       document.querySelector('#familia .head p').textContent='Un fin de semana en Coatepec, con la gente que quiero.';
