@@ -95,7 +95,10 @@ section.serie .stack>*+*{margin-top:0}
 /* about + contact */
 .about{padding:clamp(64px,10vw,140px) var(--gut);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(12,1fr);gap:32px 24px}
 .about h2{grid-column:1/5;margin:0;font:300 clamp(1.8rem,3.4vw,2.8rem)/1.1 var(--serif)}
-.about div{grid-column:5/12;max-width:58ch}
+.about div{grid-column:5/12;grid-row:2;max-width:58ch}
+.about .sobre-foto{grid-column:1/5;grid-row:2;margin:0;cursor:zoom-in}
+.about .sobre-foto img{aspect-ratio:3/4;object-fit:cover;max-width:320px}
+@media(max-width:800px){.about div,.about .sobre-foto{grid-row:auto}.about .sobre-foto{grid-column:1/-1}.about .sobre-foto img{max-width:260px}}
 .about p{margin:0 0 1.1em}
 .contact{padding:clamp(48px,8vw,120px) var(--gut) 40px;border-top:1px solid var(--line)}
 .contact a.big{display:inline-block;font:300 clamp(1.6rem,6vw,5rem)/1.05 var(--serif);letter-spacing:-.02em;text-decoration:none;border-bottom:1px solid currentColor}
@@ -156,6 +159,7 @@ dialog button{position:absolute;top:14px;right:18px;background:none;border:0;col
 <main class="page">
 <section class="about" id="sobre">
   <h2>Sobre mí</h2>
+  <figure class="sobre-foto"><img src="img/pasha-marcelo.webp" width="750" height="1000" loading="lazy" alt="Pasha junto a Marcelo en El Nido de adidas"></figure>
   <div>
     <p>Soy Pasha, fotógrafo de la Ciudad de México. Fotografío viajes, familia y lo que se cruza en el camino, casi siempre con luz natural y con tiempo para mirar.</p>
     <p>Esta página reúne lo más reciente: un viaje a Coatepec, Veracruz. También dirijo CIMA Vision, una agencia de fotografía y consultoría de imagen para equipos y marcas personales.</p>

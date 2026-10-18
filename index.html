@@ -95,7 +95,10 @@ section.serie .stack>*+*{margin-top:0}
 /* about + contact */
 .about{padding:clamp(64px,10vw,140px) var(--gut);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(12,1fr);gap:32px 24px}
 .about h2{grid-column:1/5;margin:0;font:300 clamp(1.8rem,3.4vw,2.8rem)/1.1 var(--serif)}
-.about div{grid-column:5/12;max-width:58ch}
+.about div{grid-column:5/12;grid-row:2;max-width:58ch}
+.about .sobre-foto{grid-column:1/5;grid-row:2;margin:0;cursor:zoom-in}
+.about .sobre-foto img{aspect-ratio:3/4;object-fit:cover;max-width:320px}
+@media(max-width:800px){.about div,.about .sobre-foto{grid-row:auto}.about .sobre-foto{grid-column:1/-1}.about .sobre-foto img{max-width:260px}}
 .about p{margin:0 0 1.1em}
 .contact{padding:clamp(48px,8vw,120px) var(--gut) 40px;border-top:1px solid var(--line)}
 .contact a.big{display:inline-block;font:300 clamp(1.6rem,6vw,5rem)/1.05 var(--serif);letter-spacing:-.02em;text-decoration:none;border-bottom:1px solid currentColor}
@@ -167,7 +170,7 @@ dialog button{position:absolute;top:14px;right:18px;background:none;border:0;col
 <div class="grid">
 <article class="card"><a href="/cascada"><img src="img/5961.webp" alt="Cascada entre la niebla y la selva" loading="lazy"><h3>Cascada</h3><p>Niebla, roca volcánica y el ruido constante del agua.</p></a></article>
 <article class="card"><a href="/selva"><img src="img/5991.webp" alt="Selva densa bajo cielo nublado" loading="lazy"><h3>Selva</h3><p>Desde un mirador, la copa de los árboles y los zopilotes que la vigilan.</p></a></article>
-<article class="card"><a href="/coatepec"><img src="img/6462.webp" alt="Vista de Coatepec con un cerro al fondo" loading="lazy"><h3>Coatepec</h3><p>El pueblo desde arriba y a nivel de calle.</p></a></article>
+<article class="card"><a href="/coatepec"><img src="img/6462.webp" alt="Vista de Coatepec con un cerro al fondo" loading="lazy"><h3>Coatepec</h3><p>El pueblo de mis abuelos. Hacía mucho que no iba, y me encanta volver. Desde arriba y a nivel de calle.</p></a></article>
 <article class="card"><a href="/templos"><img src="img/6674.webp" alt="Nave de una iglesia con columnas azules y piso de mosaico" loading="lazy"><h3>Templos</h3><p>Azul, dorado y luz de media mañana en las iglesias del camino.</p></a></article>
 <article class="card"><a href="/detalles"><img src="img/i6825.webp" alt="Mariposa 88 sobre una pared blanca" loading="lazy"><h3>Cosas pequeñas</h3><p>Mariposas, una oruga, vacas y un ave sola en el cielo.</p></a></article>
 <article class="card"><a href="/carretera"><img src="img/5923.webp" alt="Campo y montañas desde la carretera" loading="lazy"><h3>Carretera</h3><p>El camino de ida y vuelta.</p></a></article>
