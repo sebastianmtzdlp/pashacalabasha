@@ -96,3 +96,18 @@ inicio = (leer("_hero.html") + '<div class="grid">\n' + "\n".join(tarjetas) + "\
 with open(os.path.join(RAIZ, "index.html"), "w", encoding="utf-8") as f:
     f.write(pagina("/", "Pasha Calabasha — Fotografía", html.escape(DESC), inicio, ""))
 print("Listo:", ", ".join(["/"] + ["/" + s for s in SERIES] + ["/" + s for s in OTRAS]))
+
+
+# sitemap y robots: familia queda fuera porque es privada
+def mapa(sitio, rutas):
+    urls = "\n".join("  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>" % (sitio, r, FECHA) for r in rutas)
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n%s\n</urlset>\n' % urls)
+
+
+FECHA = "2026-10-18"
+rutas = ["/"] + ["/" + s for s in SERIES if s != "familia"] + ["/sobre", "/contacto"]
+with open(os.path.join(RAIZ, "sitemap.xml"), "w", encoding="utf-8") as f:
+    f.write(mapa("https://pashacalabasha.com", rutas))
+with open(os.path.join(RAIZ, "robots.txt"), "w", encoding="utf-8") as f:
+    f.write("User-agent: *\nAllow: /\n\nSitemap: https://pashacalabasha.com/sitemap.xml\n")
