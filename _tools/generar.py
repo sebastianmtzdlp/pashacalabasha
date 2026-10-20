@@ -77,24 +77,28 @@ for i, s in enumerate(series):
 for s, titulo in OTRAS.items():
     escribir("/" + s, pagina("/" + s, "%s — %s" % (titulo, SITIO), DESC, leer(s + ".html")))
 
-# inicio
+# inicio: portada, series en mosaico, sobre mí y contacto (diseño de la propuesta)
 tarjetas = []
-for s in series:
+FORMAS = ["s-a", "s-b", "s-c", "s-d"]
+for i, s in enumerate(series):
     if s["id"] == "familia":
         foto = '<div class="priv">Serie privada</div>'
         desc = "Con contraseña."
     else:
         foto = '<img src="%s" alt="%s" loading="lazy">' % (s["img"], html.escape(s["alt"]))
         desc = html.escape(s["desc"])
-    tarjetas.append('<article class="card"><a href="/%s">%s<h3>%s</h3><p>%s</p></a></article>'
-                    % (s["id"], foto, s["titulo"], desc))
-inicio = (leer("_hero.html") + '<div class="grid">\n' + "\n".join(tarjetas) + "\n</div>\n"
+    tarjetas.append('<a class="%s reveal" href="/%s">%s<h3>%s</h3><p>%s</p></a>'
+                    % (FORMAS[i % 4], s["id"], foto, s["titulo"], desc))
+inicio = (leer("_hero.html")
+          + '<section id="series" class="series">\n<h2 class="reveal">Series</h2>\n'
+          + '<p class="sub reveal">Trabajo personal y encargos.</p>\n<div class="sgrid">\n' + "\n".join(tarjetas) + "\n</div>\n</section>\n"
+          + leer("_inicio.html")
           + '<script>\n/* enlaces viejos (#familia, ?s=familia) llevan a la página nueva */\n'
           + '(function(){var s=(new URLSearchParams(location.search).get("s")||location.hash.slice(1)).toLowerCase();'
           + 's={pueblo:"coatepec",faq:"contacto","sobre-mi":"sobre"}[s]||s;'
           + 'if(%s.indexOf(s)>-1)location.replace("/"+s)})();\n</script>' % (str(SERIES + list(OTRAS)).replace("'", '"')))
 with open(os.path.join(RAIZ, "index.html"), "w", encoding="utf-8") as f:
-    f.write(pagina("/", "Pasha Calabasha — Fotografía", html.escape(DESC), inicio, ""))
+    f.write(pagina("/", "Pasha Calabasha — Fotografía", html.escape(DESC), inicio, "").replace("{{scripts}}", "").replace("</body>", leer("_animacion.html") + "</body>"))
 print("Listo:", ", ".join(["/"] + ["/" + s for s in SERIES] + ["/" + s for s in OTRAS]))
 
 

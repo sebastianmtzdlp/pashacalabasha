@@ -18,23 +18,16 @@
 <title>Cosas pequeñas — Pasha Calabasha</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="description" content="Mariposas, una oruga, vacas y un ave sola en el cielo.">
-<link rel="preload" href="fonts/fraunces-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
-@font-face{font-family:Fraunces;font-weight:300;font-style:normal;font-display:swap;src:url(fonts/fraunces-latin-300-normal.woff2) format("woff2")}
-@font-face{font-family:Fraunces;font-weight:300;font-style:italic;font-display:swap;src:url(fonts/fraunces-latin-300-italic.woff2) format("woff2")}
-@font-face{font-family:Fraunces;font-weight:400;font-style:normal;font-display:swap;src:url(fonts/fraunces-latin-400-normal.woff2) format("woff2")}
-@font-face{font-family:Fraunces;font-weight:400;font-style:italic;font-display:swap;src:url(fonts/fraunces-latin-400-italic.woff2) format("woff2")}
-@font-face{font-family:"Instrument Sans";font-weight:400;font-display:swap;src:url(fonts/instrument-sans-latin-400-normal.woff2) format("woff2")}
-@font-face{font-family:"Instrument Sans";font-weight:500;font-display:swap;src:url(fonts/instrument-sans-latin-500-normal.woff2) format("woff2")}
 
 :root{
-  --paper:#f3f0e9; --ink:#1c1b19; --muted:#6d685f; --line:#d9d4c8;
-  --moss:#3f4a2c;
+  --paper:#f4f1ea; --ink:#17161a; --muted:#77726a; --line:#dcd6c9;
+  --moss:#c98a2b; --amber:#c98a2b;
   --gut:clamp(16px,4vw,56px);
-  --serif:Fraunces,Georgia,serif; --sans:"Instrument Sans",system-ui,sans-serif;
-}
-@media (prefers-color-scheme:dark){
-  :root{--paper:#141412;--ink:#ece8de;--muted:#9a958a;--line:#2b2a26;--moss:#a9b88a}
+  --serif:Newsreader,Georgia,serif; --sans:Inter,system-ui,sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -45,7 +38,7 @@ a{color:inherit}
 :focus-visible{outline:2px solid var(--moss);outline-offset:3px}
 
 /* nav */
-.nav{position:fixed;inset:0 0 auto 0;z-index:10;display:flex;justify-content:space-between;padding:20px var(--gut);background:var(--paper);color:var(--ink);border-bottom:1px solid var(--line);font-size:.95rem}
+.nav{position:fixed;inset:0 0 auto 0;z-index:10;display:flex;justify-content:space-between;padding:20px 28px;mix-blend-mode:difference;color:#fff;font-size:.9rem}
 .nav a{text-decoration:none}
 .nav nav{display:flex;gap:1.6rem}
 .nav a:hover{text-decoration:underline;text-underline-offset:4px}
@@ -116,7 +109,6 @@ footer{padding:0 var(--gut) 32px;color:var(--muted);font-size:.85rem}
 .lock button{font:500 1rem var(--sans);padding:.85em 1.6em;background:var(--ink);color:var(--paper);border:0;cursor:pointer}
 .lock button:disabled{opacity:.5;cursor:wait}
 .lock .err{color:#a33a2a;margin:.8em 0 0;min-height:1.6em;font-size:.95rem}
-@media(prefers-color-scheme:dark){.lock .err{color:#e08a76}}
 #fam-grid{columns:2;column-gap:clamp(8px,1.6vw,24px);padding:0 var(--gut)}
 #fam-grid figure{break-inside:avoid;margin:0 0 clamp(8px,1.6vw,24px)}
 @media(max-width:700px){#fam-grid{columns:1}}
@@ -152,6 +144,40 @@ dialog .lb-flecha{top:50%;transform:translateY(-50%);font-size:2.4rem;line-heigh
 dialog .lb-ant{left:4px;right:auto}
 dialog .lb-sig{right:4px}
 dialog .lb-pie{position:absolute;left:0;right:0;bottom:14px;text-align:center;color:#d8d3c8;font:400 .9rem var(--sans);margin:0;padding:0 var(--gut)}
+
+/* propuesta: portada, series, sobre mí y contacto en el inicio */
+.cover{height:100vh;height:100svh;min-height:520px;position:relative;display:grid;place-items:center;background:#0e0d0c;color:#f4f1ea;overflow:hidden}
+.cover img{position:absolute;inset:0;height:100%;object-fit:cover;opacity:.55;background:none}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(42,39,34,.35),rgba(14,13,12,.75))}
+.cover h1{position:relative;z-index:2;margin:0;padding:0 var(--gut);font:300 clamp(40px,7vw,96px)/1 var(--serif);letter-spacing:-.02em;text-align:center}
+.cover h1 em{color:var(--amber);font-style:italic}
+.cover .frame-label,.cover .scroll{position:absolute;z-index:2;bottom:20px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#d2cbbb;text-decoration:none}
+.cover .frame-label{left:24px}
+.cover .scroll{right:24px}
+.series{padding:120px 28px 40px}
+.series>h2,.home-about h2{font:400 clamp(28px,3.6vw,40px)/1.1 var(--serif);margin:0 0 12px}
+.series .sub{color:var(--muted);margin:0 0 56px}
+.sgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:48px 18px}
+.sgrid a{display:block;text-decoration:none;position:relative}
+.sgrid img,.sgrid .priv{width:100%;height:auto;object-fit:cover}
+.sgrid .priv{display:grid;place-items:center;background:linear-gradient(140deg,#cfc7b6,#8e8777);color:#2b2a27;font:300 1.6rem var(--serif);font-style:italic}
+.sgrid h3{margin:12px 0 2px;font:400 clamp(1.4rem,2.2vw,1.9rem)/1.1 var(--serif)}
+.sgrid p{margin:0;color:var(--muted);font-size:.92rem;max-width:46ch}
+.sgrid a:hover h3{color:var(--amber)}
+.s-a{grid-column:span 7}.s-a img,.s-a .priv{aspect-ratio:4/3}
+.s-b{grid-column:span 5;margin-top:90px}.s-b img,.s-b .priv{aspect-ratio:3/4}
+.s-c{grid-column:span 4}.s-c img,.s-c .priv{aspect-ratio:4/5}
+.s-d{grid-column:span 8}.s-d img,.s-d .priv{aspect-ratio:16/10}
+.home-about{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;padding:120px 28px;max-width:1100px;margin:0 auto;align-items:start}
+.home-about figure img{aspect-ratio:4/5;object-fit:cover}
+.home-about p{color:#4d4a44;max-width:52ch;margin:0 0 16px;font-size:17px}
+.home-contact{padding:120px 28px 140px;text-align:center;border-top:1px solid var(--line)}
+.home-contact h2{font:300 clamp(36px,6vw,72px)/1.05 var(--serif);letter-spacing:-.02em;margin:0 0 36px}
+.home-contact a{display:inline-block;margin:6px 14px;font-size:17px;text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.home-contact a:hover{color:var(--amber);border-color:var(--amber)}
+.js .reveal{opacity:0;transform:translateY(20px)}
+@media(max-width:800px){.home-about{grid-template-columns:1fr}.s-a,.s-b,.s-c,.s-d{grid-column:1/-1;margin-top:0}}
+@media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
