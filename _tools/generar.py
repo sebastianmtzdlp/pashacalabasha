@@ -111,6 +111,8 @@ def mapa(sitio, rutas):
 
 FECHA = "2026-10-18"
 rutas = ["/"] + ["/" + s for s in SERIES if s != "familia"] + ["/sobre", "/contacto"]
+# Keepr vive en /keepr/ como sitio aparte (no lo genera este script)
+rutas += ["/keepr/"] + ["/keepr/" + s for s in ["culling", "color", "luts", "grano", "sprockets", "formatos", "papel", "instantaneas", "posts"]]
 with open(os.path.join(RAIZ, "sitemap.xml"), "w", encoding="utf-8") as f:
     f.write(mapa("https://pashacalabasha.com", rutas))
 with open(os.path.join(RAIZ, "robots.txt"), "w", encoding="utf-8") as f:

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LUTs · Keepr</title>
+<meta name="description" content="Color medido contra ColorChecker, LUTs 3D en .cube y el orden del motor.">
+<link rel="canonical" href="https://pashacalabasha.com/keepr/luts">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://pashacalabasha.com/keepr/luts">
+<meta property="og:title" content="LUTs · Keepr">
+<meta property="og:description" content="Color medido contra ColorChecker, LUTs 3D en .cube y el orden del motor.">
+<meta property="og:image" content="https://pashacalabasha.com/keepr/img/velvia.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/keepr/img/icon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/keepr/keepr.css">
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/keepr/"><img src="/keepr/img/icon.png" alt="">Keepr</a>
+    <div class="topics" aria-label="Temas"><a href="/keepr/culling">Culling</a><a href="/keepr/color">Color y presets</a><a href="/keepr/luts" aria-current="page">LUTs</a><a href="/keepr/grano">Grano</a><a href="/keepr/sprockets">Sprockets</a><a href="/keepr/formatos">Formatos</a><a href="/keepr/papel">Papel</a><a href="/keepr/instantaneas">Instantáneas</a><a href="/keepr/posts">Posts</a></div>
+    <a class="btn" href="#descargar">Para Mac</a>
+  </div>
+</nav>
+<section style="border-top:0" id="luts" class="dark">
+  <div class="wrap">
+    <div class="head">
+      <div><a class="crumb" href="/keepr/">Keepr</a> <span class="label">/ LUTs y calibración</span><h1 style="margin-top:14px">Color medido, no a ojo.</h1></div>
+      <p>Cada película está ajustada contra una carta ColorChecker pasada por un modelo espectral de película. Y si ya tienes tus propios perfiles, Keepr los lee como LUTs 3D.</p>
+    </div>
+    <div class="luts">
+      <div>
+        <div class="chart" id="chart">
+          <div class="row"><span>Digital</span><div class="patches" id="pIn"></div></div>
+          <div class="row"><span id="chartName">Portra 400</span><div class="patches" id="pOut"></div></div>
+          <div class="row"><span>Grises</span><div class="patches greys" id="gIn"></div></div>
+          <div class="row"><span></span><div class="patches greys" id="gOut"></div></div>
+        </div>
+        <div class="pills" id="lutPick" role="group" aria-label="Elegir película para la carta"></div>
+        <p class="muted" style="font-size:14px;margin-top:16px">18 parches de color y 14 pasos de gris, medidos de la salida real de Keepr.</p>
+      </div>
+      <ol class="pipe">
+        <li><div><b>LUT de color</b><p>El color de la película: el propio de Keepr o un LUT 3D en .cube de 33³ que tú instalas desde tus perfiles.</p></div></li>
+        <li><div><b>Corrección 3×3 por película</b><p>Ajustada al ColorChecker en luz lineal. Mueve el tono y guarda parte de la saturación de cada rollo.</p></div></li>
+        <li><div><b>Desvanecido</b><p>Cada tipo de película se apaga hacia su propio color con los años, con un control de cuánto.</p></div></li>
+        <li><div><b>Halación y grano</b><p>Al final, como en el negativo: halo rojo en las altas luces y grano con la forma de la emulsión.</p></div></li>
+        <li><div><b>Lee tu Lightroom</b><p>Si editaste con un perfil de película, Keepr lo detecta en el XMP y elige el rollo que corresponde.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+<div class="wrap"><div class="pager"><a class="prev" href="/keepr/color"><span class="label">← Anterior</span><b>Color y presets</b></a><a class="next" href="/keepr/grano"><span class="label">Siguiente →</span><b>Grano</b></a></div></div>
+<div class="end" id="descargar">
+  <div class="wrap">
+    <div>
+      <h2>Tu próximo rollo empieza aquí.</h2>
+      <div style="display:grid;gap:12px;justify-items:start">
+        <p class="label">Uso personal · macOS 14+</p>
+        <p style="max-width:36ch;color:var(--muted)">Doble clic en <b style="color:var(--ink)">Build Keepr.command</b> y Keepr se instala en Aplicaciones.</p>
+      </div>
+    </div>
+    <footer>
+      <span>Keepr · hecho por <a href="/">Pasha Calabasha</a> en México</span>
+      <span class="label" style="letter-spacing:.14em">▸ 36A &nbsp; KEEPR 400 &nbsp; ▸ 36</span>
+    </footer>
+  </div>
+</div>
+<script src="/keepr/keepr.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Color y presets · Keepr</title>
+<meta name="description" content="Más de 170 películas con su color, contraste y base. Compara dos rollos sobre la misma foto.">
+<link rel="canonical" href="https://pashacalabasha.com/keepr/color">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://pashacalabasha.com/keepr/color">
+<meta property="og:title" content="Color y presets · Keepr">
+<meta property="og:description" content="Más de 170 películas con su color, contraste y base. Compara dos rollos sobre la misma foto.">
+<meta property="og:image" content="https://pashacalabasha.com/keepr/img/portra.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/keepr/img/icon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/keepr/keepr.css">
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/keepr/"><img src="/keepr/img/icon.png" alt="">Keepr</a>
+    <div class="topics" aria-label="Temas"><a href="/keepr/culling">Culling</a><a href="/keepr/color" aria-current="page">Color y presets</a><a href="/keepr/luts">LUTs</a><a href="/keepr/grano">Grano</a><a href="/keepr/sprockets">Sprockets</a><a href="/keepr/formatos">Formatos</a><a href="/keepr/papel">Papel</a><a href="/keepr/instantaneas">Instantáneas</a><a href="/keepr/posts">Posts</a></div>
+    <a class="btn" href="#descargar">Para Mac</a>
+  </div>
+</nav>
+<section style="border-top:0" id="color">
+  <div class="wrap">
+    <div class="head">
+      <div><a class="crumb" href="/keepr/">Keepr</a> <span class="label">/ Color y presets</span><h1 style="margin-top:14px">Película que parece película.</h1></div>
+      <p>Cada película trae su color, su contraste, su base y su forma de desvanecerse con los años. Desliza para comparar dos rollos sobre la misma foto.</p>
+    </div>
+
+    <div class="compare" id="cmp" style="--x:50%">
+      <img id="cmpA" src="/keepr/img/retrato-400h.jpg" alt="Retrato en Fuji Pro 400H" width="1400" height="933">
+      <img id="cmpB" class="top" src="/keepr/img/retrato-portra.jpg" alt="Retrato en Kodak Portra 400" width="1400" height="933">
+      <span class="tag l" id="tagB">KODAK PORTRA 400</span>
+      <span class="tag r" id="tagA">FUJI PRO 400H</span>
+      <div class="bar"></div>
+      <input type="range" id="cmpRange" min="0" max="100" value="50" aria-label="Mover la comparación">
+    </div>
+    <div class="pills" id="pairs" role="group" aria-label="Elegir comparación">
+      <button type="button" id="pair1" aria-pressed="true" data-a="retrato-400h" data-b="retrato-portra" data-ta="FUJI PRO 400H" data-tb="KODAK PORTRA 400">Retrato · Portra vs 400H</button>
+      <button type="button" id="pair2" aria-pressed="false" data-a="trix" data-b="velvia" data-ta="KODAK TRI-X 400" data-tb="FUJI VELVIA 50" data-r="1050/1400">Palmera · Velvia vs Tri‑X</button>
+      <button type="button" id="pair3" aria-pressed="false" data-a="gold" data-b="ektar" data-ta="KODAK GOLD 200" data-tb="KODAK EKTAR 100" data-r="1050/1400">Palmera · Ektar vs Gold</button>
+    </div>
+
+    <div class="stocks">
+      <article class="stock">
+        <div class="pic"><img src="/keepr/img/portra.jpg" alt="Palmera y edificio de ladrillo en Portra 400" loading="lazy"><div class="code"><span>PORTRA 400</span><span>▸ 12A</span></div></div>
+        <h3>Kodak Portra 400</h3>
+        <div class="meta"><span class="chip">C‑41</span><span class="chip">ISO 400</span></div>
+        <p>Piel cálida y suave, sombras que no se cierran. La de bodas y retratos.</p>
+      </article>
+      <article class="stock">
+        <div class="pic"><img src="/keepr/img/velvia.jpg" alt="La misma escena en Velvia 50, cielo azul intenso" loading="lazy"><div class="code"><span>RVP 50</span><span>▸ 18A</span></div></div>
+        <h3>Fuji Velvia 50</h3>
+        <div class="meta"><span class="chip">E‑6</span><span class="chip">ISO 50</span></div>
+        <p>Cielos densos y verdes que saturan. Para paisaje con sol.</p>
+      </article>
+      <article class="stock">
+        <div class="pic"><img src="/keepr/img/trix.jpg" alt="La misma escena en Tri‑X, blanco y negro" loading="lazy"><div class="code"><span>TX 400</span><span>▸ 24A</span></div></div>
+        <h3>Kodak Tri‑X 400</h3>
+        <div class="meta"><span class="chip">B&amp;N</span><span class="chip">ISO 400</span></div>
+        <p>Contraste con dientes y un grano que se nota. Calle y documental.</p>
+      </article>
+      <article class="stock">
+        <div class="pic"><img src="/keepr/img/ektar.jpg" alt="La misma escena en Ektar 100" loading="lazy"><div class="code"><span>EKTAR 100</span><span>▸ 7A</span></div></div>
+        <h3>Kodak Ektar 100</h3>
+        <div class="meta"><span class="chip">C‑41</span><span class="chip">ISO 100</span></div>
+        <p>El negativo más fino y saturado. Rojos y azules limpios.</p>
+      </article>
+      <article class="stock">
+        <div class="pic"><img src="/keepr/img/gold.jpg" alt="La misma escena en Gold 200, tonos cálidos" loading="lazy"><div class="code"><span>GB 200</span><span>▸ 3A</span></div></div>
+        <h3>Kodak Gold 200</h3>
+        <div class="meta"><span class="chip">C‑41</span><span class="chip">ISO 200</span></div>
+        <p>Amarillos de tarde de verano. El rollo de las vacaciones.</p>
+      </article>
+      <article class="stock">
+        <div class="pic"><img src="/keepr/img/400h.jpg" alt="La misma escena en Pro 400H, tonos pastel" loading="lazy"><div class="code"><span>PRO 400H</span><span>▸ 30A</span></div></div>
+        <h3>Fuji Pro 400H</h3>
+        <div class="meta"><span class="chip">C‑41</span><span class="chip">ISO 400</span></div>
+        <p>Verdes menta y altas luces aireadas. Ya no se fabrica; aquí sigue.</p>
+      </article>
+    </div>
+
+    <div class="cloud" aria-label="Algunas de las películas incluidas">
+      <span><b>Kodak</b> Portra 160 / 400 / 800</span><span>Ektar 100</span><span>Gold 200</span><span>ColorPlus 200</span><span>UltraMax 400</span><span>Ektachrome E100</span><span>Vision3 50D / 250D / 500T</span><span>Tri‑X</span><span>T‑Max P3200</span><span>Double‑X 5222</span><span>Kodachrome 25 / 64</span><span>Aerochrome</span>
+      <span><b>Fujifilm</b> Pro 400H</span><span>160NS</span><span>Superia 400</span><span>C200</span><span>Velvia 50 / 100F</span><span>Provia 100F</span><span>Astia 100F</span><span>Acros II</span><span>Natura 1600</span>
+      <span><b>Ilford</b> HP5 Plus</span><span>FP4 Plus</span><span>Delta 100 / 400 / 3200</span><span>Pan F Plus</span><span>SFX 200</span><span>XP2</span>
+      <span><b>CineStill</b> 800T</span><span>400D</span><span>50D</span>
+      <span><b>Agfa</b> Vista</span><span>Optima</span><span>Scala 200</span><span>Agfacolor Neu ’40s</span>
+      <span><b>Rollei</b> Retro 80S / 400S</span><span>Infrared 400</span>
+      <span><b>Foma</b> · <b>Orwo</b> · <b>Adox</b> · <b>Kentmere</b> · <b>Lomography</b></span>
+      <span><b>Polaroid</b> 600 / 669</span><span><b>Instax</b> Mini / Wide / Square</span><span>FP‑100C</span>
+      <span><b>Technicolor</b> dos tiras</span><span><b>Autochrome</b> Lumière</span>
+    </div>
+  </div>
+</section>
+<div class="wrap"><div class="pager"><a class="prev" href="/keepr/culling"><span class="label">← Anterior</span><b>Culling</b></a><a class="next" href="/keepr/luts"><span class="label">Siguiente →</span><b>LUTs</b></a></div></div>
+<div class="end" id="descargar">
+  <div class="wrap">
+    <div>
+      <h2>Tu próximo rollo empieza aquí.</h2>
+      <div style="display:grid;gap:12px;justify-items:start">
+        <p class="label">Uso personal · macOS 14+</p>
+        <p style="max-width:36ch;color:var(--muted)">Doble clic en <b style="color:var(--ink)">Build Keepr.command</b> y Keepr se instala en Aplicaciones.</p>
+      </div>
+    </div>
+    <footer>
+      <span>Keepr · hecho por <a href="/">Pasha Calabasha</a> en México</span>
+      <span class="label" style="letter-spacing:.14em">▸ 36A &nbsp; KEEPR 400 &nbsp; ▸ 36</span>
+    </footer>
+  </div>
+</div>
+<script src="/keepr/keepr.js" defer></script>
+</body>
+</html>
