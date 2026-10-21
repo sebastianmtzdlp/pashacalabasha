@@ -16,7 +16,7 @@ DESC = "Portafolio de fotografía de Pasha Calabasha. Coatepec, Veracruz."
 
 # Orden de las series (inicio y anterior/siguiente). Familia va al final.
 SERIES = ["cascada", "selva", "coatepec", "templos", "detalles", "carretera", "familia"]
-OTRAS = {"sobre": "Sobre mí", "contacto": "Contacto"}
+OTRAS = {"fotolibros": "Fotolibros", "sobre": "Sobre mí", "contacto": "Contacto"}
 
 
 def leer(nombre):
@@ -110,7 +110,7 @@ def mapa(sitio, rutas):
 
 
 FECHA = "2026-10-18"
-rutas = ["/"] + ["/" + s for s in SERIES if s != "familia"] + ["/sobre", "/contacto"]
+rutas = ["/"] + ["/" + s for s in SERIES if s != "familia"] + ["/fotolibros", "/sobre", "/contacto"]
 # Keepr vive en /keepr/ como sitio aparte (no lo genera este script)
 rutas += ["/keepr/"] + ["/keepr/" + s for s in ["culling", "color", "luts", "grano", "sprockets", "formatos", "papel", "instantaneas", "posts"]]
 with open(os.path.join(RAIZ, "sitemap.xml"), "w", encoding="utf-8") as f:
