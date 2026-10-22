@@ -57,4 +57,13 @@
     b.addEventListener('click',function(){var im=document.getElementById('fmtImg');im.src='/keepr/img/'+f[1]+'.jpg';im.alt='Hoja de contactos en '+f[0];
       document.getElementById('fmtName').textContent=f[0];document.getElementById('fmtDims').textContent=f[2];document.getElementById('fmtNote').textContent=f[3];
       fp.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')})});fp.appendChild(b)});
+
+  // Revelado: cada bloque aparece y sus fotos se revelan como en la charola
+  if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var els=document.querySelectorAll('.hero .wrap>div,.hero figure,.counts>div,.head,.tcard,section figure,.compare,.why,.facts>div,.stock,.gtype,.ink,.local h2,.local .grid>div,.plist li,.pager a,.end h2');
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el){
+      var sib=el.parentElement?Array.prototype.indexOf.call(el.parentElement.children,el):0;
+      el.classList.add('rv');el.style.transitionDelay=Math.min(sib,5)*90+'ms';io.observe(el)});
+  }
 })();
