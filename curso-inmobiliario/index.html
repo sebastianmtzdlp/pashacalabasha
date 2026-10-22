@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Forografiq Inmobiliario</title>
+</head>
+<body>
+<style>
+/* Plano: concreto (claro) o blueprint (oscuro), con tinta y cinta métrica. El curso es un plano de la propiedad. */
+:root{
+  --paper:#ECEBE7;
+  --card:#F6F5F1;
+  --ink:#17181A;
+  --muted:#5D5F63;
+  --line:#C9C7BF;
+  --accent:#E0A526;
+  --accent-ink:#17181A;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --sans:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#14253B;--card:#1B2F4A;--ink:#EDE8DC;--muted:#A9B6C6;--line:#3A5274;--accent:#E0A526;--accent-ink:#14253B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#14253B;--card:#1B2F4A;--ink:#EDE8DC;--muted:#A9B6C6;--line:#3A5274;--accent:#E0A526;--accent-ink:#14253B;
+  color-scheme:dark;
+}
+.tema-btn{font:700 .8rem var(--mono);padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:transparent;color:var(--ink);cursor:pointer;transition:transform .15s ease-out;white-space:nowrap}
+.tema-btn:active{transform:scale(.97)}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font:400 16px/1.6 var(--sans);
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:20px 64px;
+  -webkit-text-size-adjust:100%;
+}
+a{color:inherit}
+main{max-width:680px;margin:0 auto}
+h1,h2,h3{text-wrap:balance;line-height:1.15;margin:0;font-weight:800;letter-spacing:-.01em}
+h1{font-size:clamp(2.1rem,8vw,3.2rem);font-stretch:85%}
+h2{font-size:1.5rem;margin-top:2.2rem}
+h3{font-size:1.1rem;margin-top:1.6rem}
+p{margin:.8em 0}
+.mono{font-family:var(--mono);font-size:.82rem;letter-spacing:.02em}
+.muted{color:var(--muted)}
+
+/* barra superior */
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 0 18px;border-bottom:1px solid var(--line)}
+.marca{font-weight:800;text-decoration:none;font-stretch:85%;font-size:1.05rem}
+.nav{display:flex;gap:14px;font-size:.92rem}
+.nav a{text-decoration:none;color:var(--muted);padding:6px 0;border-bottom:2px solid transparent}
+.nav a[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+
+/* portada */
+.hero{padding:34px 0 12px;display:grid;gap:18px}
+.plano{width:100%;height:auto;display:block;max-width:100%}
+.plano path,.plano rect{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round;stroke-dasharray:var(--len,600);stroke-dashoffset:0}
+.plano .cota{stroke:var(--muted);stroke-width:1.2;stroke-dasharray:none}
+.plano text{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.plano .acento{fill:var(--accent);stroke:none}
+.hero .lead{font-size:1.08rem;color:var(--muted);max-width:52ch;margin:0}
+.cta{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;background:var(--ink);color:var(--paper);border:0;border-radius:6px;font:700 1rem var(--sans);text-decoration:none;cursor:pointer;transition:transform .15s ease-out;width:fit-content}
+.cta:active{transform:scale(.97)}
+.cta:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,.nav a:focus-visible,.ruta a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.cta .flecha{color:var(--accent)}
+
+/* ruta de clases */
+.ruta{list-style:none;padding:0;margin:14px 0 0;border-top:1px solid var(--ink)}
+.ruta li{border-bottom:1px solid var(--line)}
+.ruta a{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:14px 2px;text-decoration:none;min-width:0}
+.ruta .num{font-family:var(--mono);color:var(--muted);font-size:.85rem}
+.ruta .tit{min-width:0;font-weight:700}
+.ruta .tit small{display:block;font-weight:400;color:var(--muted);font-size:.9rem;line-height:1.35}
+.estado{font-family:var(--mono);font-size:.74rem;white-space:nowrap;padding:3px 8px;border-radius:4px}
+.estado.vista{background:var(--ink);color:var(--paper)}
+.estado.aqui{background:var(--accent);color:var(--accent-ink)}
+.estado.pend{border:1px dashed var(--muted);color:var(--muted)}
+.ruta li.aqui{background:linear-gradient(90deg,rgba(224,165,38,.16),transparent 70%)}
+
+.bloque{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px}
+.final{display:grid;gap:8px}
+
+/* clase */
+.clase-head{padding:26px 0 8px;border-bottom:1px solid var(--ink);margin-bottom:6px}
+.clase-head .mono{color:var(--muted)}
+.clase-head h1{margin-top:8px}
+.tema{color:var(--muted);font-size:1.02rem;margin:.6em 0 0}
+.intro{font-size:1.1rem;margin:1.2em 0 .4em}
+.cuerpo ul{padding-left:1.1em;margin:.6em 0}
+.cuerpo li{margin:.45em 0}
+mark.clave{background:none;color:var(--ink);box-shadow:inset 0 -.55em 0 var(--accent);padding:0 2px}
+.frase{margin:1.4em 0;padding:.2em 0 .2em 16px;border-left:3px solid var(--ink);font-size:1.12rem;font-weight:700;letter-spacing:-.01em}
+.turno{margin-top:2rem}
+.turno ol{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:10px}
+.turno label{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;cursor:pointer}
+.turno input[type=checkbox]{width:20px;height:20px;margin:3px 0 0;accent-color:var(--ink)}
+.turno .hecho{text-decoration:line-through;color:var(--muted)}
+.cuaderno{margin-top:16px;display:grid;gap:6px}
+.cuaderno label{font-weight:700;font-size:.95rem}
+textarea{width:100%;min-height:120px;font:400 15px/1.5 var(--sans);padding:12px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);resize:vertical}
+.acciones{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.btn{font:700 .95rem var(--sans);padding:11px 16px;border-radius:6px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:transform .15s ease-out}
+.btn:active{transform:scale(.97)}
+.btn.sel{background:var(--ink);color:var(--paper)}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:34px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+.pager a{text-decoration:none;padding:12px 0;min-width:0}
+.pager a.sig{text-align:right}
+.pager small{display:block;color:var(--muted);font-family:var(--mono);font-size:.76rem}
+.pager span{font-weight:700;overflow-wrap:anywhere}
+
+/* preguntas */
+.buscar{width:100%;font:400 1rem var(--sans);padding:12px 14px;border:1px solid var(--ink);border-radius:6px;background:var(--card);color:var(--ink);margin-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.chip{font:600 .86rem var(--sans);padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.faq{list-style:none;padding:0;margin:0;border-top:1px solid var(--ink)}
+.faq li{padding:16px 0;border-bottom:1px solid var(--line)}
+.faq .p{font-weight:700;margin:0}
+.faq .r{margin:.35em 0 .5em;color:var(--muted)}
+.faq a{font-family:var(--mono);font-size:.82rem}
+.vacio{color:var(--muted);padding:20px 0}
+
+/* acerca */
+.acerca ol,.acerca ul{padding-left:1.2em}
+.acerca li{margin:.5em 0}
+
+@media (prefers-reduced-motion:reduce){
+  .plano path,.plano rect{animation:none!important}
+  *{transition:none!important}
+}
+@keyframes trazar{to{stroke-dashoffset:0}}
+.plano path,.plano rect{animation:trazar 1.6s cubic-bezier(.2,.7,.1,1) both}
+.plano .r2{animation-delay:.35s}
+.plano .r3{animation-delay:.7s}
+.plano .r4{animation-delay:1.05s}
+@media (min-width:640px){
+  .ruta a{padding:16px 4px}
+  .pager a{padding:14px 0}
+}
+</style>
+
+<header class="top">
+  <a class="marca" href="#inicio">Forografiq</a>
+  <nav class="nav" aria-label="Secciones">
+    <a href="#inicio" data-nav="inicio">Curso</a>
+    <a href="#preguntas" data-nav="preguntas">Preguntas</a>
+    <a href="#acerca" data-nav="acerca">Cómo usarlo</a>
+  </nav>
+  <button class="tema-btn" id="tema" type="button" aria-pressed="false">Blueprint</button>
+</header>
+
+<main id="app" aria-live="polite"></main>
+
+<script>
+var CLASES = [
+ {n:1,t:"El encargo y el mercado",tema:"Qué compra el cliente y qué necesitas saber antes de llegar.",
+  intro:"Antes de tomar la cámara tienes que saber para quién trabajas. Un agente quiere vender rápido, un propietario quiere ver su casa como la imagina y un desarrollador necesita fotos consistentes para todo un proyecto.",
+  cuerpo:["<p>Pide la información por adelantado: planos, lista de ambientes, horario con luz natural y si la propiedad está habitada o vacía.</p>","<ul><li>Define el paquete: fotos básicas, fotos más tour, o fotos más video corto para redes.</li><li>Calcula el tiempo. Un departamento pequeño suele tomar una o dos horas en sitio; una casa con jardín, más.</li></ul>","<p><mark class=\"clave\">La foto vende el espacio, no el objeto.</mark> Por eso el cliente debe saber qué ambientes importan más.</p>"],
+  frase:"Pregunta antes de llegar, no en el lugar.",
+  turno:["Redacta un formulario de 8 preguntas para tu briefing con clientes.","Elige tres portales o redes donde se publican inmuebles en tu zona y anota qué formato piden."]},
+ {n:2,t:"Tu equipo para inmuebles",tema:"Qué lente usar en cada ambiente y qué accesorios llevar.",
+  intro:"Con lentes y accesorios correctos, la mitad del trabajo ya está hecho.",
+  cuerpo:["<ul><li><strong>Gran angular:</strong> el XF 16mm f/1.4 (unos 24 mm equivalentes en APS-C) es tu lente principal para interiores.</li><li><strong>Ultra gran angular:</strong> el Samyang 12mm f/2 (unos 18 mm) sirve en baños y cocinas chicas, pero las líneas se curvan en los bordes.</li><li><strong>Zoom:</strong> el Tamron 17-70mm para detalles, fachadas y tomas desde lejos.</li><li><strong>Flash manual:</strong> el Viltrox Vintage Z1 no tiene TTL. Úsalo en rebote, con potencia baja, y mide con una toma de prueba.</li></ul>","<p>El trípode y el nivel son lo que más separa un trabajo amateur de uno profesional. <mark class=\"clave\">La cámara debe ir nivelada.</mark></p>"],
+  frase:"Un buen accesorio ahorra una hora de edición.",
+  turno:["Fotografía el mismo cuarto con el XF 16mm y con el Samyang 12mm, y compara cómo se curvan las paredes.","Mide cuánto tardas en armar trípode, nivel y flash. Anota el tiempo para tu checklist."]},
+ {n:3,t:"Luz y composición en interiores",tema:"Cómo trabajar la luz natural y el encuadre desde las esquinas.",
+  intro:"Las fotos de interiores fallan más por la luz que por el equipo.",
+  cuerpo:["<ul><li>Usa primero la luz natural. Abre cortinas, enciende las luces del techo y apaga lámparas amarillas que enfríen la escena.</li><li>Fotografía desde las esquinas, a la altura del pecho, con la cámara nivelada. Así las paredes se ven rectas y el espacio se lee completo.</li><li>No inclines la cámara hacia arriba ni hacia abajo. Si lo haces, las verticales se caen; corrígelas en edición con la herramienta de perspectiva.</li><li>Retira manijas, botes y cables: son distracciones.</li></ul>","<p><mark class=\"clave\">Se fotografía la luz, no el cuarto.</mark></p>"],
+  frase:"Las líneas verticales deben ser verticales.",
+  turno:["Fotografía un cuarto desde dos esquinas opuestas y elige cuál vende mejor el espacio.","Haz una lista de cinco objetos que retirarías de un cuarto antes de la toma."]},
+ {n:4,t:"Bracketing y HDR",tema:"Cuándo hacer tres exposiciones y cómo evitar halos.",
+  intro:"Cuando una ventana tiene mucha luz y el interior está oscuro, una sola toma no alcanza.",
+  cuerpo:["<ul><li>Usa trípode y haz tres exposiciones: una normal, una dos pasos abajo y otra dos pasos arriba.</li><li>Combínalas en Lightroom con la fusión HDR. Revisa los bordes de ventanas y lámparas: si aparecen halos, baja la intensidad.</li><li>No todo necesita HDR. Si la luz es pareja, una toma bien expuesta basta y se ve más natural.</li><li>Si algo cambia entre tomas (una cortina, una persona), usa una sola.</li></ul>","<p><mark class=\"clave\">El HDR se nota cuando se ve.</mark> Úsalo para resolver la luz, no para dar dramatismo.</p>"],
+  frase:"Si el HDR se nota, sobra.",
+  turno:["Haz un bracketing de tres tomas en una ventana, combínalas y compáralas con una sola toma.","Revisa tu última foto HDR y busca halos alrededor de los bordes."]},
+ {n:5,t:"Exteriores y fachadas",tema:"Luz, ángulo y permisos para fotografiar la fachada.",
+  intro:"La fachada suele ser lo primero que ve el cliente. Trátala como la portada de una revista.",
+  cuerpo:["<ul><li>La mejor luz es la hora dorada o un cielo nublado uniforme. El sol de mediodía crea sombras duras y quema fachadas.</li><li>Fotografía en ángulo de tres cuartos para mostrar volumen. Pide al cliente que retire vehículos y botes.</li><li>Antes de volar un dron, revisa la regulación vigente de la aviación civil en México y los requisitos de permisos. Si no tienes permiso, resuelve el exterior con el zoom.</li></ul>"],
+  frase:"La fachada es la portada. Trátala como tal.",
+  turno:["Planea una toma de fachada: hora, ángulo y qué retirar del encuadre.","Busca la regulación vigente de drones en México y anota los requisitos que aplican a tu trabajo."]},
+ {n:6,t:"Video de recorrido",tema:"Estructura, movimiento y formatos para portales y redes.",
+  intro:"Un video corto de la propiedad suele vender más en redes que diez fotos.",
+  cuerpo:["<ul><li><strong>Estructura:</strong> plano de apertura desde la entrada, recorrido por los ambientes principales y cierre en el mejor ángulo.</li><li><strong>Movimiento:</strong> la cámara lenta y constante. Un gimbal, como el Osmo Pocket 3, o caminar despacio evita tomas temblorosas.</li><li><strong>Ritmo:</strong> da unos 5 segundos a cada plano para que el ojo descanse.</li><li><strong>Formatos:</strong> horizontal 16:9 para portales y vertical 9:16 para Reels y TikTok.</li></ul>","<p>La música no debe competir con el espacio. <mark class=\"clave\">Un recorrido bien hecho se entiende sin voz.</mark></p>"],
+  frase:"Muévete como si el comprador caminara la casa.",
+  turno:["Graba un recorrido de 30 segundos con tres planos: apertura, movimiento y cierre.","Haz la misma toma en vertical y en horizontal, y observa qué parte del encuadre se pierde."]},
+ {n:7,t:"Flujo de edición",tema:"Selección, corrección, color y exportación consistentes.",
+  intro:"Una edición consistente hace que las fotos de un mismo proyecto parezcan del mismo día.",
+  cuerpo:["<ul><li><strong>Selección:</strong> revisa primero en exportaciones pequeñas y marca las mejores. Así avanzas rápido y no llenas el almacenamiento.</li><li><strong>Corrección:</strong> lente y perspectiva con DxO PureRAW.</li><li><strong>Color:</strong> en Lightroom busca color natural y blancos neutros.</li><li><strong>Acabado:</strong> si buscas un look más cinematográfico, Capture One. No abuses del grano: en inmuebles distrae.</li><li><strong>Exportación:</strong> alta resolución para el cliente y versión web optimizada para portales.</li></ul>","<p><mark class=\"clave\">Consistencia antes que espectacularidad.</mark></p>"],
+  frase:"Si una foto se ve falsa, el comprador desconfía de todas.",
+  turno:["Aplica el mismo ajuste de color a cinco fotos de un proyecto y compara si se ven del mismo día.","Define un preset base para interiores y guárdalo con un nombre claro."]},
+ {n:8,t:"Entrega y marketing",tema:"Nombres de archivo, paquete de entrega y contenido para redes.",
+  intro:"La foto no termina al exportarla. Termina cuando el cliente la publica.",
+  cuerpo:["<ul><li>Nombra los archivos con la dirección y el ambiente, por ejemplo cocina-01.jpg. Ayuda al SEO y al cliente.</li><li>Entrega un paquete ordenado: fotos, video, enlace al tour y textos de publicación.</li><li>En redes: antes y después, un reel de 15 segundos y una historia con la zona y el precio, si el cliente lo autoriza.</li><li>Pide autorización por escrito para usar las imágenes en tu portafolio.</li></ul>","<p><mark class=\"clave\">Entregar bien también vende.</mark></p>"],
+  frase:"El paquete ordenado se nota antes que la foto.",
+  turno:["Escribe un texto de publicación de unas 60 palabras para una propiedad de tu zona.","Arma el paquete de entrega de un proyecto: carpetas, nombres de archivo y enlace."]},
+ {n:9,t:"Negocio y contrato",tema:"Tarifas, alcance, cancelación y derechos de uso.",
+  intro:"Un buen trabajo sin tarifas claras ni contrato termina en discusión.",
+  cuerpo:["<ul><li><strong>Tarifas:</strong> por paquete y por tamaño de propiedad. Anota cuánto cobras por fotos, por video y por edición rápida.</li><li><strong>Alcance:</strong> número de fotos, si el video está incluido, tiempos de entrega y revisiones.</li><li><strong>Cancelación:</strong> qué pasa si la propiedad no está lista el día de la cita.</li><li><strong>Derechos de uso:</strong> para qué puede usar el cliente las imágenes y para qué las puedes usar tú.</li></ul>","<p>Si el servicio va bajo una agencia, aclara quién firma el contrato. <mark class=\"clave\">Lo que no está en el contrato no se cobra.</mark></p>"],
+  frase:"Un contrato corto también protege al cliente.",
+  turno:["Redacta una cotización con tres paquetes: fotos, fotos más video, y paquete completo.","Escribe las tres cláusulas que no pueden faltar en tu contrato."]}
+];
+
+var FAQ = [
+ {p:"¿Qué lente uso para interiores?",r:"El XF 16mm como principal. El Samyang 12mm solo en cuartos muy chicos.",c:"Equipo",n:2},
+ {p:"¿Por qué las paredes se ven curvas?",r:"Un ultra gran angular cerca de los bordes, o la cámara inclinada.",c:"Luz",n:3},
+ {p:"¿Cuándo hago HDR?",r:"Cuando una ventana tiene mucha más luz que el interior y no alcanza con una toma.",c:"Luz",n:4},
+ {p:"¿Puedo volar un dron para fachadas?",r:"Revisa la regulación vigente y los permisos antes. Si no tienes permiso, usa el zoom.",c:"Equipo",n:5},
+ {p:"¿Cómo evito que el video tiemble?",r:"Usa gimbal o camina despacio, y da unos 5 segundos a cada plano.",c:"Video",n:6},
+ {p:"¿Qué formato uso para Reels y TikTok?",r:"Vertical 9:16. Para portales, horizontal 16:9.",c:"Video",n:6},
+ {p:"¿Por qué mi edición se ve falsa?",r:"Suele ser saturación excesiva, cielos reemplazados sin aviso o demasiado grano.",c:"Edición",n:7},
+ {p:"¿Cómo nombro los archivos?",r:"Con la dirección y el ambiente, por ejemplo cocina-01.jpg.",c:"Entrega",n:8},
+ {p:"¿Puedo publicar las fotos en mi portafolio?",r:"Sí, con autorización por escrito del cliente.",c:"Entrega",n:8},
+ {p:"¿Cuánto cobro?",r:"Define tarifas por paquete y por tamaño de propiedad, y revisa cuánto cobras por video y edición.",c:"Negocio",n:9},
+ {p:"¿Necesito contrato para trabajos chicos?",r:"Sí, aunque sea corto. Debe tener alcance, plazos y derechos de uso.",c:"Negocio",n:9},
+ {p:"¿Qué hago si la propiedad no está lista?",r:"Ten una cláusula de cancelación y reprogramación con costo claro.",c:"Negocio",n:9}
+];
+var CATS = ["Todas","Equipo","Luz","Video","Edición","Entrega","Negocio"];
+
+var KEY = "forografiq-progreso";
+function leer(){ try{ var s=JSON.parse(localStorage.getItem(KEY)||"{}"); s.vistas=s.vistas||[]; s.turno=s.turno||{}; return s; }catch(e){ return {vistas:[],turno:{}}; } }
+function guardar(s){ try{ localStorage.setItem(KEY,JSON.stringify(s)); }catch(e){} }
+function notaGet(n){ try{ return localStorage.getItem("forografiq-nota-"+n)||""; }catch(e){ return ""; } }
+function notaSet(n,v){ try{ localStorage.setItem("forografiq-nota-"+n,v); }catch(e){} }
+function norm(s){ return String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase(); }
+
+var st = leer();
+var filtroCat = "Todas";
+var busqueda = "";
+
+function aqui(){ for (var i=0;i<CLASES.length;i++){ if (st.vistas.indexOf(CLASES[i].n)<0) return CLASES[i].n; } return 0; }
+function estadoDe(n){ if (st.vistas.indexOf(n)>=0) return "vista"; if (aqui()===n) return "aqui"; return "pend"; }
+var ETIQ = {vista:"vista",aqui:"aquí vas",pend:"pendiente"};
+
+function plano(){
+  return '<svg class="plano" viewBox="0 0 680 230" role="img" aria-label="Plano de una vivienda con cuatro ambientes">'
+   +'<rect class="r1" x="20" y="20" width="640" height="190" style="--len:1800"/>'
+   +'<path class="r2" d="M20 120 H250 M250 20 V120 M250 120 V210 M250 150 H380" style="--len:900"/>'
+   +'<path class="r3" d="M380 20 V210 M380 110 H660 M520 110 V210" style="--len:1200"/>'
+   +'<path class="r4 cota" d="M20 232 H660 M20 228 V236 M660 228 V236" style="--len:800"/>'
+   +'<text x="36" y="58">ambiente 1</text><text x="268" y="58">ambiente 2</text><text x="396" y="150">ambiente 3</text>'
+   +'<rect class="acento" x="236" y="104" width="8" height="8"/>'
+   +'<text x="300" y="226">lente 16 mm · luz natural · nivel</text>'
+   +'</svg>';
+}
+
+function renderHome(){
+  var sig = aqui();
+  var hayVistas = st.vistas.length>0;
+  var ruta = CLASES.map(function(c){
+    var e = estadoDe(c.n);
+    return '<li class="'+(e==="aqui"?"aqui":"")+'"><a href="#clase-'+c.n+'">'
+      +'<span class="num">'+String(c.n).padStart(2,"0")+'</span>'
+      +'<span class="tit">'+c.t+'<small>'+c.tema+'</small></span>'
+      +'<span class="estado '+e+'">'+ETIQ[e]+'</span></a></li>';
+  }).join("");
+  var boton = sig
+    ? '<a class="cta" href="#clase-'+sig+'">'+(hayVistas?"Seguir con la Clase "+sig:"Empezar con la Clase 1")+' <span class="flecha">→</span></a>'
+    : '<a class="cta" href="#clase-1">Repasar desde la Clase 1 <span class="flecha">→</span></a>';
+  var avance = st.vistas.length+" de "+CLASES.length+" clases vistas";
+  return '<section class="hero">'
+    +plano()
+    +'<p class="mono muted">Curso · fotografía y video inmobiliario</p>'
+    +'<h1>Fotos, video y tour que venden el espacio.</h1>'
+    +'<p class="lead">Nueve clases para entregar un paquete completo de una propiedad: encargo, equipo, luz, edición y entrega. Cada clase tiene ejercicios que haces con tu propia cámara.</p>'
+    +boton
+    +'<p class="mono muted">'+avance+'</p>'
+    +'</section>'
+    +'<h2>Ruta de clases</h2>'
+    +'<ol class="ruta">'+ruta+'</ol>'
+    +'<h2>Proyecto final</h2>'
+    +'<div class="bloque final"><p>Documenta una propiedad real o simulada con un paquete completo: entre 15 y 20 fotos editadas, un video de 45 segundos y textos de publicación.</p>'
+    +'<p class="muted">Revísalo con la checklist de sesión de campo de cada clase antes de entregarlo.</p>'
+    +'<div class="acciones"><a class="btn" href="#preguntas">Preguntas frecuentes</a><a class="btn" href="#acerca">Cómo usar este curso</a></div></div>';
+}
+
+function renderClase(n){
+  var c = CLASES.filter(function(x){return x.n===n;})[0];
+  if (!c) return renderHome();
+  var prev = CLASES.filter(function(x){return x.n===n-1;})[0];
+  var next = CLASES.filter(function(x){return x.n===n+1;})[0];
+  var vista = st.vistas.indexOf(n)>=0;
+  var turno = c.turno.map(function(t,i){
+    var k = n+"-"+i; var hecho = !!st.turno[k];
+    return '<li><label><input type="checkbox" data-turno="'+k+'"'+(hecho?' checked':'')+'><span class="'+(hecho?"hecho":"")+'">'+t+'</span></label></li>';
+  }).join("");
+  return '<article>'
+    +'<header class="clase-head"><p class="mono">Clase '+n+' de '+CLASES.length+' · '+ETIQ[estadoDe(n)]+'</p>'
+    +'<h1>'+c.t+'</h1><p class="tema">'+c.tema+'</p></header>'
+    +'<p class="intro">'+c.intro+'</p>'
+    +'<div class="cuerpo">'+c.cuerpo.join("")+'</div>'
+    +'<blockquote class="frase">'+c.frase+'</blockquote>'
+    +'<section class="turno"><h2>Tu turno</h2><ol>'+turno+'</ol>'
+    +'<div class="cuaderno"><label for="nota">Tu cuaderno de la clase</label>'
+    +'<textarea id="nota" data-nota="'+n+'" placeholder="Anota aquí tus pruebas, medidas y dudas. Se guarda en este dispositivo.">'+notaGet(n).replace(/</g,"&lt;")+'</textarea></div></section>'
+    +'<div class="acciones"><button class="btn'+(vista?" sel":"")+'" data-act="vista" data-n="'+n+'" aria-pressed="'+vista+'">'+(vista?"Vista ✓":"Marcar como vista")+'</button>'
+    +'<a class="btn" href="#preguntas">Preguntas</a></div>'
+    +'<nav class="pager">'
+    +(prev?'<a href="#clase-'+prev.n+'"><small>← Clase '+prev.n+'</small><span>'+prev.t+'</span></a>':'<span></span>')
+    +(next?'<a class="sig" href="#clase-'+next.n+'"><small>Clase '+next.n+' →</small><span>'+next.t+'</span></a>':'<a class="sig" href="#inicio"><small>Final del curso</small><span>Volver a la ruta</span></a>')
+    +'</nav></article>';
+}
+
+function renderFaq(){
+  var q = norm(busqueda.trim());
+  var lista = FAQ.filter(function(f){
+    var okCat = filtroCat==="Todas" || f.c===filtroCat;
+    var okQ = !q || norm(f.p+" "+f.r+" "+f.c).indexOf(q)>=0;
+    return okCat && okQ;
+  });
+  var chips = CATS.map(function(c){
+    return '<button class="chip" data-act="cat" data-cat="'+c+'" aria-pressed="'+(c===filtroCat)+'">'+c+'</button>';
+  }).join("");
+  var items = lista.length ? lista.map(function(f){
+    return '<li><p class="p">'+f.p+'</p><p class="r">'+f.r+'</p><a href="#clase-'+f.n+'">Ver la clase '+f.n+' →</a></li>';
+  }).join("") : '<li class="vacio">No encontré una pregunta con eso. Prueba con otra palabra o revisa la ruta de clases.</li>';
+  return '<h1 style="margin-top:22px">Preguntas frecuentes</h1>'
+    +'<p class="muted">Cada respuesta lleva a la clase donde se explica con detalle.</p>'
+    +'<label for="buscar" class="mono muted">Buscar</label>'
+    +'<input id="buscar" class="buscar" type="search" value="'+busqueda.replace(/"/g,"&quot;")+'" placeholder="Por ejemplo: HDR, Reels, contrato">'
+    +'<div class="chips" role="group" aria-label="Categoría">'+chips+'</div>'
+    +'<ul class="faq">'+items+'</ul>';
+}
+
+function renderAcerca(){
+  return '<article class="acerca"><h1 style="margin-top:22px">Cómo usar este curso</h1>'
+    +'<p>El curso va en orden, aunque puedes saltar a cualquier clase desde la ruta. Cada clase tiene un bloque de ejercicios y un cuaderno que se guarda en tu dispositivo.</p>'
+    +'<h2>Pasos sugeridos</h2><ol>'
+    +'<li>Lee la clase completa antes de salir a fotografiar.</li>'
+    +'<li>Haz los ejercicios de "Tu turno" con tu propio equipo.</li>'
+    +'<li>Anota dudas y pruebas en el cuaderno.</li>'
+    +'<li>Marca la clase como vista cuando termines.</li>'
+    +'<li>Al final, haz el proyecto con una propiedad real o simulada.</li></ol>'
+    +'<h2>Qué guarda el curso en tu dispositivo</h2>'
+    +'<p>Tu avance, los ejercicios marcados y tus cuadernos se guardan solo en este navegador. Si cambias de dispositivo o borras los datos del sitio, empiezas de nuevo.</p>'
+    +'<h2>Límites</h2><ul>'
+    +'<li>Este curso no garantiza ingresos. Los resultados dependen de tu mercado y de tu trabajo.</li>'
+    +'<li>Las regulaciones, como la de drones, cambian: confirma siempre la vigente antes de volar.</li>'
+    +'<li>Las recomendaciones de equipo son orientativas; revisa tu presupuesto y tus necesidades.</li></ul>'
+    +'</article>';
+}
+
+function marcarNav(){
+  var h = location.hash || "#inicio";
+  var sec = h.indexOf("#clase-")===0 ? "inicio" : h.replace("#","");
+  document.querySelectorAll("[data-nav]").forEach(function(a){
+    if (a.getAttribute("data-nav")===sec) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
+  });
+}
+
+function render(){
+  var h = location.hash || "#inicio";
+  var html;
+  if (h==="#preguntas") html = renderFaq();
+  else if (h==="#acerca") html = renderAcerca();
+  else if (h.indexOf("#clase-")===0) html = renderClase(parseInt(h.slice(7),10));
+  else html = renderHome();
+  document.getElementById("app").innerHTML = html;
+  marcarNav();
+  if (h==="#preguntas" && busqueda) { var b=document.getElementById("buscar"); if(b){ b.focus(); b.setSelectionRange(b.value.length,b.value.length);} }
+  window.scrollTo(0,0);
+}
+
+document.getElementById("app").addEventListener("click", function(e){
+  var el = e.target.closest("[data-act]");
+  if (!el) return;
+  var act = el.getAttribute("data-act");
+  if (act==="vista"){
+    var n = parseInt(el.getAttribute("data-n"),10);
+    var i = st.vistas.indexOf(n);
+    if (i>=0) st.vistas.splice(i,1); else st.vistas.push(n);
+    guardar(st); render();
+  }
+  if (act==="cat"){
+    filtroCat = el.getAttribute("data-cat"); render();
+  }
+});
+document.getElementById("app").addEventListener("change", function(e){
+  var t = e.target;
+  if (t.hasAttribute("data-turno")){
+    st.turno[t.getAttribute("data-turno")] = t.checked; guardar(st);
+    var span = t.parentNode.querySelector("span"); if (span) span.className = t.checked ? "hecho" : "";
+  }
+});
+document.getElementById("app").addEventListener("input", function(e){
+  var t = e.target;
+  if (t.id==="buscar"){ busqueda = t.value; var pos=t.selectionStart; var sec=document.getElementById("app");
+    var prevFocus = true; render(); }
+  if (t.hasAttribute("data-nota")){ notaSet(t.getAttribute("data-nota"), t.value); }
+});
+
+var TEMA_KEY = "forografiq-tema";
+function temaGuardado(){ try{ return localStorage.getItem(TEMA_KEY)||""; }catch(e){ return ""; } }
+function temaSet(v){ try{ localStorage.setItem(TEMA_KEY,v); }catch(e){} }
+function esOscuro(){
+  var explicito = document.documentElement.getAttribute("data-theme");
+  if (explicito) return explicito==="dark";
+  return !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+}
+function pintarTema(){
+  var oscuro = esOscuro();
+  var b = document.getElementById("tema");
+  b.textContent = oscuro ? "Concreto" : "Blueprint";
+  b.setAttribute("aria-pressed", oscuro ? "true" : "false");
+  b.setAttribute("aria-label", oscuro ? "Cambiar a modo concreto claro" : "Cambiar a modo blueprint oscuro");
+}
+var guardado = temaGuardado();
+if (guardado) document.documentElement.setAttribute("data-theme", guardado);
+document.getElementById("tema").addEventListener("click", function(){
+  var nuevo = esOscuro() ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", nuevo);
+  temaSet(nuevo);
+  pintarTema();
+});
+pintarTema();
+
+window.addEventListener("hashchange", render);
+render();
+</script>
+</body>
+</html>
