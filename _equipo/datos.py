@@ -3,6 +3,7 @@
 EQUIPO = [
     {
         "id": "x-pro2",
+        "producto": {"archivo": "x-pro2-1", "autor": "TypeZero", "licencia": "CC BY-SA 4.0", "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0/deed.es", "fuente": "https://commons.wikimedia.org/wiki/File:Fujifilm-x-pro2.jpg"},
         "tipo": "camara",
         "marca": "Fujifilm",
         "nombre": "X-Pro2",
@@ -34,6 +35,8 @@ EQUIPO = [
     },
     {
         "id": "x-t5",
+        "producto": {"archivo": "x-t5-2", "autor": "Müllowitsch", "licencia": "CC0", "licencia_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.es", "fuente": "https://commons.wikimedia.org/wiki/File:Fujifilm_X-T5.jpg"},
+        "banda": {"archivo": "x-t5-1", "autor": "Aps1729", "licencia": "CC0", "licencia_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.es", "fuente": "https://commons.wikimedia.org/wiki/File:Fujifilm-X-T5.jpg"},
         "tipo": "camara",
         "marca": "Fujifilm",
         "nombre": "X-T5",
@@ -96,6 +99,7 @@ EQUIPO = [
     },
     {
         "id": "xf16-f14",
+        "producto": {"archivo": "xf16-f14-1", "autor": "Dennis Bratland", "licencia": "CC BY-SA 4.0", "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0/deed.es", "fuente": "https://commons.wikimedia.org/wiki/File:Fujinon_XF_16mm_F1.4_R_WR.JPG"},
         "tipo": "lente",
         "marca": "Fujifilm",
         "nombre": "XF16mm F1.4 R WR",

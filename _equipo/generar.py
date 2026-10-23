@@ -26,6 +26,22 @@ def tipo(it):
     return "cámara" if it["tipo"] == "camara" else "lente"
 
 
+def visual(it, clave="producto"):
+    """Foto real si la pieza la tiene; si no, el dibujo."""
+    f = it.get(clave)
+    if f:
+        return f'<img src="{IMG}equipo/{f["archivo"]}.webp" alt="{e(nombre_completo(it))}" loading="lazy">'
+    return dibujo(it, "linea", "#000")
+
+
+def credito(it, clave="producto"):
+    f = it.get(clave)
+    if not f:
+        return ""
+    return (f'<p class="credito">Foto: {e(f["autor"])}, <a href="{f["licencia_url"]}">{e(f["licencia"])}</a>'
+            f' · <a href="{f["fuente"]}">Wikimedia Commons</a></p>')
+
+
 def otros(it):
     return [o for o in EQUIPO if o["id"] != it["id"]]
 
@@ -54,6 +70,9 @@ h1{font:300 clamp(32px,6vw,40px)/1.11 var(--f);margin:0;letter-spacing:-.01em}
 .intro{font-size:16px;font-weight:300;max-width:34em;margin:0}
 .lamina{background:#fff}
 .lamina svg{padding:22px}
+.lamina img{width:100%;height:auto;object-fit:contain}
+.credito{font-size:12px;color:var(--graphite);margin:8px 0 0}
+.credito a{color:var(--graphite)}
 .datos{display:grid;grid-template-columns:4fr 8fr;gap:22px;padding:var(--g) 0}
 .datos h2,.puntos h2,.fotos h2,.mas h2{font:300 19px/1.15 var(--f);margin:0}
 table{width:100%;border-collapse:collapse;border-top:1px solid var(--ink)}
@@ -78,6 +97,7 @@ td.n{width:44px;color:var(--graphite)}td.k{width:34%}
 .mas .rejilla a.celda{color:var(--ink)}
 .mas .lamina{aspect-ratio:4/3;display:grid;place-items:center}
 .mas .lamina svg{padding:15px}
+.mas .lamina img{width:100%;height:auto;object-fit:contain}
 .mas .nom{display:block;padding-top:8px}
 .mas .ir{color:var(--link)}
 .indice{grid-template-columns:1fr;border-bottom:0;padding-bottom:33px}
@@ -101,7 +121,7 @@ def te(it):
     filas = "".join(f'<tr><td class="n">{i:02d}</td><td class="k">{e(k)}</td><td>{e(v)}</td></tr>' for i, (k, v) in enumerate(it["specs"], 1))
     puntos = "".join(f'<div><b>{i:02d}</b><h3>{e(t.lower())}</h3><p>{e(p)}</p></div>' for i, (t, p) in enumerate(it["puntos"], 1))
     fotos = "".join(f'<figure><img src="{IMG}{f}.webp" alt="{e(a)}" loading="lazy"><figcaption>{e(a.lower())}</figcaption></figure>' for f, a in it["fotos"])
-    mas = "".join(f'<a class="celda" href="{o["id"]}.html"><span class="lamina">{dibujo(o, "linea", "#000")}</span>'
+    mas = "".join(f'<a class="celda" href="{o["id"]}.html"><span class="lamina">{visual(o)}</span>'
                   f'<span class="nom">{e(nombre_completo(o).lower())}</span><span class="ir">ver ficha</span></a>' for o in otros(it))
     return f'''<!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -115,10 +135,10 @@ def te(it):
 <section class="hero"><div class="meta"><div><div class="etq">{tipo(it)} · {e(it["marca"].lower())} · {it["anio"]}</div></div>
 <div><h1>{e(it["nombre"].lower())}</h1><p class="sub">{e(it["resumen"])}</p></div>
 <p class="intro">{e(it["intro"])}</p></div>
-<div class="lamina">{dibujo(it, "linea", "#000")}</div></section>
+<div><div class="lamina">{visual(it)}</div>{credito(it)}</div></section>
 <section class="datos"><h2>especificaciones</h2><table>{filas}</table></section>
 </main>
-<section class="banda"><div class="wrap">{dibujo(it, "linea", "#f6f8f7")}<div class="pie">{e(n)} — {it["anio"]}</div></div></section>
+<section class="banda"><div class="wrap">{visual(it, "banda") if it.get("banda") else dibujo(it, "linea", "#f6f8f7")}<div class="pie">{e(n)} — {it["anio"]}</div></div></section>
 <main class="wrap">
 <section class="puntos">{puntos}</section>
 <section class="fotos"><div class="cab"><h2>fotos</h2><span>{e(it["marca"].lower())} {e(it["nombre"].lower())}</span></div><div class="rejilla">{fotos}</div></section>
@@ -130,7 +150,7 @@ def te(it):
 
 
 def indice():
-    celdas = "".join(f'<a class="celda" href="{it["id"]}.html"><span class="lamina">{dibujo(it, "linea", "#000")}</span>'
+    celdas = "".join(f'<a class="celda" href="{it["id"]}.html"><span class="lamina">{visual(it)}</span>'
                      f'<span class="nom">{e(nombre_completo(it).lower())}</span><span class="etq">{tipo(it)} · {it["anio"]}</span></a>' for it in EQUIPO)
     t = te(EQUIPO[0])
     cabeza = t[:t.index("<main")]
