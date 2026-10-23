@@ -7,7 +7,7 @@
 
 Después de editar algo en _paginas/, correr:  python3 _tools/generar.py
 """
-import html, os, re
+import html, os, re, sys
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 P = os.path.join(RAIZ, "_paginas")
@@ -77,6 +77,12 @@ for i, s in enumerate(series):
 for s, titulo in OTRAS.items():
     escribir("/" + s, pagina("/" + s, "%s — %s" % (titulo, SITIO), DESC, leer(s + ".html")))
 
+# equipo: /equipo y sus piezas, con el mismo encabezado; y el bloque de la portada
+sys.path.insert(0, os.path.join(RAIZ, "_equipo"))
+import paginas as equipo
+equipo.escribir(RAIZ)
+EQUIPO_INICIO = equipo.seccion_inicio()
+
 # inicio: portada, series en mosaico, sobre mí y contacto (diseño de la propuesta)
 tarjetas = []
 FORMAS = ["s-a", "s-b", "s-c", "s-d"]
@@ -92,6 +98,7 @@ for i, s in enumerate(series):
 inicio = (leer("_hero.html")
           + '<section id="series" class="series">\n<h2 class="reveal">Series</h2>\n'
           + '<p class="sub reveal">Trabajo personal y encargos.</p>\n<div class="sgrid">\n' + "\n".join(tarjetas) + "\n</div>\n</section>\n"
+          + EQUIPO_INICIO
           + leer("_inicio.html")
           + '<script>\n/* enlaces viejos (#familia, ?s=familia) llevan a la página nueva */\n'
           + '(function(){var s=(new URLSearchParams(location.search).get("s")||location.hash.slice(1)).toLowerCase();'
@@ -110,7 +117,8 @@ def mapa(sitio, rutas):
 
 
 FECHA = "2026-10-18"
-rutas = ["/"] + ["/" + s for s in SERIES if s != "familia"] + ["/fotolibros", "/cursos", "/sobre", "/contacto"]
+rutas = ["/"] + ["/" + s for s in SERIES if s != "familia"] + ["/fotolibros", "/cursos", "/equipo", "/sobre", "/contacto"]
+rutas += ["/equipo/" + it["id"] for it in equipo.EQUIPO]
 # Keepr vive en /keepr/ como sitio aparte (no lo genera este script)
 rutas += ["/keepr/"] + ["/keepr/" + s for s in ["culling", "color", "luts", "grano", "sprockets", "formatos", "papel", "instantaneas", "posts"]]
 with open(os.path.join(RAIZ, "sitemap.xml"), "w", encoding="utf-8") as f:
