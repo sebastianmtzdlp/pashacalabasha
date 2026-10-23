@@ -28,8 +28,8 @@ def tipo(it):
     return "cámara" if it["tipo"] == "camara" else "lente"
 
 
-# Todas las piezas en dibujo de línea, para que se vean igual. Poner False para volver a las fotos con crédito.
-SOLO_DIBUJO = True
+# Poner True para forzar dibujos de línea en todas las piezas (las fotos propias se ocultan).
+SOLO_DIBUJO = False
 
 
 def visual(it):
@@ -44,8 +44,7 @@ def credito(it):
     f = it.get("producto")
     if not f or SOLO_DIBUJO:
         return ""
-    return (f'<p class="credito">Foto: {e(f["autor"])}, <a href="{f["licencia_url"]}">{e(f["licencia"])}</a>'
-            f' · <a href="{f["fuente"]}">Wikimedia Commons</a></p>')
+    return '<p class="credito">Foto propia</p>'
 
 
 def tarjeta(it):
