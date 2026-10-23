@@ -28,17 +28,21 @@ def tipo(it):
     return "cámara" if it["tipo"] == "camara" else "lente"
 
 
+# Todas las piezas en dibujo de línea, para que se vean igual. Poner False para volver a las fotos con crédito.
+SOLO_DIBUJO = True
+
+
 def visual(it):
-    """Foto real si la pieza tiene una; si no, el dibujo."""
+    """Foto real si la pieza tiene una y no estamos en SOLO_DIBUJO; si no, el dibujo."""
     f = it.get("producto")
-    if f:
+    if f and not SOLO_DIBUJO:
         return f'<img src="/img/equipo/{f["archivo"]}.webp" alt="{e(nombre_completo(it))}" loading="lazy">'
     return dibujo(it, "linea", "#17161a")
 
 
 def credito(it):
     f = it.get("producto")
-    if not f:
+    if not f or SOLO_DIBUJO:
         return ""
     return (f'<p class="credito">Foto: {e(f["autor"])}, <a href="{f["licencia_url"]}">{e(f["licencia"])}</a>'
             f' · <a href="{f["fuente"]}">Wikimedia Commons</a></p>')
