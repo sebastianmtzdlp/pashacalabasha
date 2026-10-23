@@ -123,7 +123,7 @@ rutas += ["/equipo/" + it["id"] for it in equipo.EQUIPO]
 rutas += ["/keepr/"] + ["/keepr/" + s for s in ["culling", "color", "rollos", "luts", "grano", "sprockets", "formatos", "papel", "instantaneas", "posts"]]
 sys.path.insert(0, os.path.join(RAIZ, "_rollos"))
 import rollos  # noqa: E402
-rutas += ["/keepr/rollos/" + r["id"] for r in rollos.ROLLOS]
+rutas += ["/keepr/rollos/" + r["id"] for r in rollos.ROLLOS] + ["/keepr/rollos/en/"] + ["/keepr/rollos/en/" + r["id"] for r in rollos.ROLLOS]
 with open(os.path.join(RAIZ, "sitemap.xml"), "w", encoding="utf-8") as f:
     f.write(mapa("https://pashacalabasha.com", rutas))
 with open(os.path.join(RAIZ, "robots.txt"), "w", encoding="utf-8") as f:

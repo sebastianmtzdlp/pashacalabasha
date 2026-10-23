@@ -18,22 +18,26 @@ ROLLOS = [
             "Por eso mismo se ve como se ve. Es una emulsión pensada para cámaras sencillas y laboratorios de una hora, y eso le dejó un color cálido, un contraste amable y un grano que no se esconde. Lo que antes era “lo normal” hoy es exactamente el look que mucha gente intenta imitar con filtros.",
         ],
         "secciones": [
+            ("De dónde viene", [
+                "Según PetaPixel, ColorPlus es prima de Kodak Gold 200: las dos vienen de los Kodacolor VR de comienzos de los ochenta. Gold siguió evolucionando, sobre todo en Norteamérica; ColorPlus se quedó casi congelada en el tiempo y se vendió más en Asia. El nombre ni siquiera existía al principio. En 2025 Kodak sacó un Kodacolor 200 que muchos creen que es la misma película en caja nueva.",
+                "El precio también es parte de su carácter: según el mismo repaso, cuesta algo más de la mitad que un rollo de Portra. Eso significa casi dos rollos por el precio de uno.",
+            ]),
             ("Un rollo de batalla", [
-                "ColorPlus es heredera directa de los negativos de consumo de Kodak de los ochenta y noventa. Su borde todavía lo delata: no dice “ColorPlus” sino un sobrio <b>KODAK 200-8</b>, el mismo que llevan otros rollos de la familia.",
-                "Solo se fabrica en 35mm y siempre ha estado en la parte más baja del catálogo. Esa es su gracia: es el rollo para gastar sin culpa, para probar una cámara recién comprada o para dárselo a alguien que nunca ha disparado película.",
+                "ColorPlus es heredera directa de los negativos de consumo de Kodak de los ochenta y noventa. Su borde todavía lo delata: no dice “ColorPlus” sino un sobrio <b>KODAK 200-8</b>.",
+                "Solo se fabrica en 35mm y siempre ha estado en la parte más baja del catálogo. Es el rollo para gastar sin culpa, para probar una cámara recién comprada o para dárselo a alguien que nunca ha disparado película.",
             ]),
             ("Cómo se ve", [
-                "Cálido, primero que nada. Las altas luces tiran a crema, los cielos azules salen un poco más verdosos que en la vida real y los rojos y naranjas se encienden. La piel queda dorada, con ese tono de foto pegada en un álbum.",
-                "El contraste es medio y la saturación algo más alta de lo que esperarías de un rollo tan barato. En sombras profundas aparece algo de color sucio, a veces verde, a veces magenta: es parte del encanto, no un defecto que haya que corregir.",
+                "Cálida, pero suave. Los colores son más tenues que en Ektar o en un digital, con un aire de los ochenta: los rojos y los rosas destacan un poco más que los azules y los verdes. No salta de la hoja; se queda.",
+                "El contraste es bajo y las sombras no se cierran tanto. Lo que en Ektar sería drama aquí es matiz. Y el grano es fino: sorprende lo poco que se ve para un rollo de consumo.",
             ]),
             ("Cómo exponerla", [
-                "Trátala como si fuera ISO 100 o 125. Con un paso de más, las sombras se limpian y el color se asienta; subexpuesta, el grano crece rápido y los negros se lavan.",
+                "Muchos la disparan a ISO 100 y aguanta bien ese paso extra. Sobreexpuesta dos o tres pasos sigue dando imágenes limpias; subexpuesta, no bajes de un paso. Si tienes dudas, dale más luz.",
                 "Brilla a pleno sol y en sombra abierta. De noche o en interiores sin flash se queda corta: ahí conviene otro rollo.",
             ]),
         ],
         "cita": "Lo que antes era “lo normal” hoy es exactamente el look que todos intentan imitar.",
-        "pros": ["Color cálido con mucha personalidad", "Muy barata y fácil de encontrar", "Perdona la sobreexposición"],
-        "contras": ["Poca latitud en sombras", "Grano visible a ISO nominal", "Solo existe en 35mm"],
+        "pros": ["Color cálido y suave, con aire de los ochenta", "Grano fino y detalle sorprendente", "Muy barata: algo más de la mitad que Portra"],
+        "contras": ["Colores menos vivos que Ektar o Portra", "Contraste bajo: no hace drama", "Solo se fabrica en 35mm"],
         "para": "Para quien empieza en película, para viajes y vacaciones a pleno sol, y para cualquiera que quiera fotos que parezcan sacadas de una caja de zapatos.",
         "veredicto": "ColorPlus 200 no intenta ser Portra y está bien así. Es cálida, imperfecta y honesta, y en Keepr es una de las formas más rápidas de darle a una sesión digital la nostalgia de un rollo revelado en la esquina.",
         "hoja": "130.jpg", "foto": None, "vs": "kodak-gold-200",
@@ -47,7 +51,7 @@ ROLLOS = [
         "dek": "El primo un poco más fino de ColorPlus. Amarillos dorados, piel cálida y la sensación de que siempre son las seis de la tarde.",
         "intro": [
             "Si ColorPlus es el rollo de batalla, Gold 200 es el de los domingos. Comparte el carácter cálido de los negativos de consumo de Kodak, pero con un grano más contenido y un color un poco más limpio.",
-            "Durante años fue solo de 35mm; desde 2022 también existe en 120, y eso le dio una segunda vida entre quienes usan medio formato y no quieren pagar Portra.",
+            "Se consigue en 35mm y en 120, y eso le da una segunda vida entre quienes usan medio formato y no quieren pagar Portra.",
         ],
         "secciones": [
             ("Cómo se ve", [

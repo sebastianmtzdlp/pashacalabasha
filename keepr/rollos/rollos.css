@@ -139,3 +139,5 @@ dd{margin:0;text-align:right}
 .pie .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding-top:24px;padding-bottom:calc(28px + env(safe-area-inset-bottom,0px));font-family:var(--sans);font-size:14px;color:var(--muted)}
 .pie a{color:var(--ink)}
 @media (prefers-reduced-motion:reduce){.tarjeta img{transition:none}}
+.idioma{font-family:var(--sans);font-size:14px;font-weight:500;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:999px;white-space:nowrap;flex:none}
+.idioma:hover{color:var(--ink);background:var(--paper2)}
