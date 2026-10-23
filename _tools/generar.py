@@ -120,7 +120,10 @@ FECHA = "2026-10-18"
 rutas = ["/"] + ["/" + s for s in SERIES if s != "familia"] + ["/fotolibros", "/cursos", "/equipo", "/sobre", "/contacto"]
 rutas += ["/equipo/" + it["id"] for it in equipo.EQUIPO]
 # Keepr vive en /keepr/ como sitio aparte (no lo genera este script)
-rutas += ["/keepr/"] + ["/keepr/" + s for s in ["culling", "color", "luts", "grano", "sprockets", "formatos", "papel", "instantaneas", "posts"]]
+rutas += ["/keepr/"] + ["/keepr/" + s for s in ["culling", "color", "rollos", "luts", "grano", "sprockets", "formatos", "papel", "instantaneas", "posts"]]
+sys.path.insert(0, os.path.join(RAIZ, "_rollos"))
+import rollos  # noqa: E402
+rutas += ["/keepr/rollos/" + r["id"] for r in rollos.ROLLOS]
 with open(os.path.join(RAIZ, "sitemap.xml"), "w", encoding="utf-8") as f:
     f.write(mapa("https://pashacalabasha.com", rutas))
 with open(os.path.join(RAIZ, "robots.txt"), "w", encoding="utf-8") as f:
