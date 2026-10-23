@@ -15,6 +15,9 @@ SITIO = "https://pashacalabasha.com"
 POR_ID = {r["id"]: r for r in ROLLOS}
 e = html.escape
 
+# Sin contact sheets ni fotos de ejemplo por ahora (pedido de Pasha). Poner en True para volver a mostrarlas.
+CON_FOTOS = False
+
 MESES = {
     "es": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
     "en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
@@ -170,9 +173,11 @@ def tarjeta(r, lang, grande=False):
     t = texto(r, lang)
     L = ETIQUETAS[lang]
     clase = "tarjeta grande" if grande else "tarjeta"
-    return ('<a class="%s" href="%s" style="--acento:%s"><div class="ph"><img src="/keepr/img/rollos/%s" alt="%s" loading="lazy" width="810" height="368"></div>'
+    ph = ('<div class="ph"><img src="/keepr/img/rollos/%s" alt="%s" loading="lazy" width="810" height="368"></div>'
+          % (r["id"] + "-t.jpg", e(L["tarjeta_alt"].format(n=completo(r))))) if CON_FOTOS else ""
+    return ('<a class="%s" href="%s" style="--acento:%s">%s'
             '<div><span class="kicker">%s · %s</span><h3>%s</h3><p>%s</p></div></a>') % (
-        clase, url(lang, r["id"]), r["acento"], r["id"] + "-t.jpg", e(L["tarjeta_alt"].format(n=completo(r))),
+        clase, url(lang, r["id"]), r["acento"], ph,
         e(t["proceso"]), "ISO " + r["iso"], e(t["titulo"]), e(t["dek"]))
 
 
@@ -184,7 +189,7 @@ CUERPO = """<main class="art" style="--acento:{acento}">
   <p class="firma"><span>{L[por]} <b>Pasha Calabasha</b></span><span>{fecha}</span><span>{min} {L[leer]}</span></p>
   {caja}
 </header>
-<figure class="hero wrap"><img src="/keepr/img/rollos/{id}.jpg" alt="{hero_alt}" width="900" height="485"><figcaption>{hero_cap}</figcaption></figure>
+{hero}
 <div class="cuerpo wrap">
   <article class="texto">
     {intro}
@@ -218,10 +223,7 @@ CUERPO = """<main class="art" style="--acento:{acento}">
 <section class="vs wrap">
   <p class="kicker">{L[frente]}</p>
   <h2>{frase_vs}</h2>
-  <div class="dos">
-    <figure><img src="/keepr/img/rollos/{id}-t.jpg" alt="{tarjeta_alt}" loading="lazy" width="810" height="368"><figcaption><b>{nombre}</b> · {proceso} · ISO {iso}</figcaption></figure>
-    <a href="{vs_url}"><figure><img src="/keepr/img/rollos/{vs_id}-t.jpg" alt="{vs_alt}" loading="lazy" width="810" height="368"><figcaption><b>{vs_nombre}</b> · {vs_proceso} · ISO {vs_iso} →</figcaption></figure></a>
-  </div>
+  {dos}
   <p class="nota">{L[vs_nota]}</p>
 </section>
 <section class="mas wrap">
@@ -241,7 +243,7 @@ def articulo(r, lang):
         secciones.append("<h2>%s</h2>\n%s" % (e(h), "\n".join("<p>%s</p>" % p for p in ps)))
         if k == 0:
             secciones.append('<blockquote class="cita"><p>%s</p></blockquote>' % e(t["cita"]))
-            if r["foto"]:
+            if r["foto"] and CON_FOTOS:
                 secciones.append('<figure class="foto"><img src="/keepr/img/%s" alt="%s" loading="lazy">'
                                  '<figcaption>%s</figcaption></figure>' % (
                                      r["foto"], e(L["foto_alt"].format(n=nombre)), e(L["foto_alt"].format(n=nombre))))
@@ -252,8 +254,16 @@ def articulo(r, lang):
     barras = (barra(L["contraste"], r["c"], 0.85, 1.25, "%.2f" % r["c"])
               + ("" if gris else barra(L["saturacion"], r["s"], 0.8, 1.35, "%.2f" % r["s"]))
               + barra(L["grano"], r["g"], 0, 0.15, "%.2f" % r["g"]))
-    return pagina(lang, r["id"], t["titulo"] + " · Keepr", t["dek"], "/keepr/img/rollos/%s.jpg" % r["id"], CUERPO.format(
-        L=L, acento=r["acento"], indice=url(lang), tipo=e(t["tipo"]), titulo=e(t["titulo"]), dek=e(t["dek"]),
+    hero = ('<figure class="hero wrap"><img src="/keepr/img/rollos/%s.jpg" alt="%s" width="900" height="485"><figcaption>%s</figcaption></figure>'
+            % (r["id"], e(L["hero_alt"].format(n=nombre)), L["hero_cap"].format(n=e(nombre), e=e(r["edge"])))) if CON_FOTOS else ""
+    dos = ('<div class="dos"><figure><img src="/keepr/img/rollos/%s-t.jpg" alt="%s" loading="lazy" width="810" height="368"><figcaption><b>%s</b> · %s · ISO %s</figcaption></figure>'
+           '<a href="%s"><figure><img src="/keepr/img/rollos/%s-t.jpg" alt="%s" loading="lazy" width="810" height="368"><figcaption><b>%s</b> · %s · ISO %s →</figcaption></figure></a></div>'
+           % (r["id"], e(L["tarjeta_alt"].format(n=nombre)), e(nombre), e(t["proceso"]), r["iso"],
+              url(lang, vs["id"]), vs["id"], e(L["vs_alt"].format(n=completo(vs))), e(completo(vs)), e(vs_t["proceso"]), vs["iso"])) if CON_FOTOS else (
+          '<div class="dos"><p><b>%s</b> · %s · ISO %s</p><p><a href="%s"><b>%s</b> · %s · ISO %s →</a></p></div>'
+          % (e(nombre), e(t["proceso"]), r["iso"], url(lang, vs["id"]), e(completo(vs)), e(vs_t["proceso"]), vs["iso"]))
+    return pagina(lang, r["id"], t["titulo"] + " · Keepr", t["dek"], "/og.jpg", CUERPO.format(
+        L=L, hero=hero, dos=dos, acento=r["acento"], indice=url(lang), tipo=e(t["tipo"]), titulo=e(t["titulo"]), dek=e(t["dek"]),
         fecha=fecha_larga(FECHA, lang), min=minutos(t), caja=caja(r), id=r["id"],
         hero_alt=e(L["hero_alt"].format(n=nombre)), hero_cap=L["hero_cap"].format(n=e(nombre), e=e(r["edge"])),
         intro="\n".join('<p%s>%s</p>' % (' class="primero"' if i == 0 else "", p) for i, p in enumerate(t["intro"])),
@@ -282,7 +292,7 @@ INDICE = """<main class="indice">
 def indice(lang):
     L = ETIQUETAS[lang]
     portada, resto = ROLLOS[0], ROLLOS[1:]
-    return pagina(lang, None, L["titulo_indice"], L["indice_meta"], "/keepr/img/rollos/%s.jpg" % portada["id"],
+    return pagina(lang, None, L["titulo_indice"], L["indice_meta"], "/og.jpg",
                   INDICE.format(L=L, portada=tarjeta(portada, lang, True), resto="".join(tarjeta(x, lang) for x in resto)))
 
 
