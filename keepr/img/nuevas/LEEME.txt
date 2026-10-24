@@ -1,0 +1,11 @@
+uncut-comparativa.jpg — "Still on the roll": comparativa cortado vs. sin cortar (export de Frames, rollo de prueba de 12 cuadros), 35 mm
+uncut-cuadro-escaner-positivo.jpg — "Still on the roll": cuadro 6 en el escáner, positivo, la película sigue hacia los cuadros vecinos, 35 mm
+uncut-cuadro-escaner-negativo.jpg — "Still on the roll": el mismo cuadro 6 en el escáner, negativo, 35 mm
+uncut-primer-cuadro-fondo-blanco.jpg — "Still on the roll": primer cuadro del rollo sobre fondo blanco (queda el inicio real del rollo), 35 mm
+uncut-tira3-escaner-positivo.jpg — "Still on the roll": tira de 3 cuadros sin cortar en el escáner, positivo, 35 mm
+grano-i-d3200.jpg — Grano: Ilford Delta 3200, export completo, 35 mm (2:3)
+grano-k-trix.jpg — Grano: Kodak Tri-X 400, export completo, 35 mm (2:3)
+grano-k-tmax3200.jpg — Grano: Kodak T-Max P3200, export completo, 35 mm (2:3)
+grano-i-d3200e800.jpg — Grano: Ilford Delta 3200 expuesta a EI 800, export completo, 35 mm (2:3)
+grano-comparacion-12pct.jpg — Grano: original vs. Keepr Portra 400 vs. Keepr Tri-X vs. Capture One Grain 12, recorte de la misma foto, 35 mm
+(No existe todavía una comparación Half Frame vs. 35 mm ni recortes de grano al 100 %.)
