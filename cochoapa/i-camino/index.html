@@ -1,0 +1,76 @@
+<title>Cochoapa · Camino</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Libre+Caslon+Text:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a dummy of the printed book, drawn to scale (170 × 240 mm pages).
+   One rule for every photo: it sits inside the same 118 mm box, 50 mm from the top edge. */
+:root{
+  --ground:#2a2b2b; --paper:#f7f7f4; --ink:#141414; --ink-soft:#6c6d6a; --line:#3b3c3c; --label:#c9c9c4;
+  --display:"Instrument Serif","Iowan Old Style",Georgia,serif;
+  --body:"Libre Caslon Text",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --bx:15.3%; --bw:69.4%; --by:20.8%; --fx:8.8%; --fy:4.2%;
+  color-scheme:dark;
+}
+body{background:var(--ground);color:var(--label);font-family:var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 80px}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+.vols{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.vols .on{color:var(--paper)}
+header{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;border-bottom:1px solid var(--line);padding-bottom:20px}
+header h1{font-family:var(--display);font-weight:400;font-size:clamp(44px,8vw,88px);line-height:.9;margin:0;color:var(--paper);letter-spacing:-.01em;text-wrap:balance}
+header h1 i{color:var(--ink-soft);font-size:.45em;letter-spacing:0}
+.meta{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;line-height:1.7;text-align:right;color:var(--ink-soft)}
+.meta b{color:var(--label);font-weight:500}
+.intro{max-width:62ch;font-size:15px;line-height:1.7;margin:0}
+.intro em{color:var(--paper)}
+figure{margin:0;display:flex;flex-direction:column;gap:12px}
+.spread{display:grid;grid-template-columns:1fr 1fr;width:100%;max-width:100%;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.spread.single{grid-template-columns:1fr;width:50%;margin-left:auto}
+.spread.single.left{margin-left:0}
+.spread.wrapc{display:block}
+.spread.wrapc img{width:100%;display:block}
+.spread.endp{display:block;aspect-ratio:340/240;overflow:hidden;background:var(--paper)}
+.spread.endp img{width:101.8%;max-width:none;margin:-1.2% 0 0 -.9%;display:block}
+.page{aspect-ratio:170/240}
+.page.v{box-shadow:inset -14px 0 18px -16px rgba(0,0,0,.35)}
+.page.r{box-shadow:inset 14px 0 18px -16px rgba(0,0,0,.35)}
+
+.page{position:relative;background:var(--paper);color:var(--ink);overflow:hidden;container-type:inline-size}
+.box{position:absolute;left:var(--bx);width:var(--bw);top:var(--by);aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+.box img{display:block;max-width:100%;max-height:100%}
+.box img.land{width:100%;height:auto}
+.box img.port{height:100%;width:auto}
+.folio{position:absolute;bottom:var(--fy);font-family:var(--mono);font-size:2.3cqi;letter-spacing:.08em;color:var(--ink-soft)}
+.v .folio{left:var(--fx)}.r .folio{right:var(--fx)}
+.title-pg h2{position:absolute;left:var(--bx);top:var(--by);margin:0;font-family:var(--display);font-weight:400;font-size:17cqi;line-height:.9}
+.title-pg p{position:absolute;left:var(--bx);bottom:12%;margin:0;font-family:var(--mono);font-size:2.6cqi;letter-spacing:.12em;text-transform:uppercase;line-height:1.8;color:var(--ink-soft)}
+.concept{position:absolute;left:var(--bx);right:var(--bx);top:50%;transform:translateY(-50%);font-family:var(--body);font-size:3.6cqi;line-height:1.75;margin:0}
+.concept .en{display:block;color:var(--ink-soft);font-style:italic}
+.concept .gap{display:block;height:1.4em}
+.label{position:absolute;left:var(--bx);right:var(--bx);top:var(--by);font-family:var(--body);font-size:3.1cqi;line-height:1.6}
+.label .t{font-family:var(--display);font-size:7cqi;line-height:1;margin-bottom:.5em}
+.label .k{font-family:var(--mono);font-size:2.4cqi;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-top:1.4em;line-height:1.9}
+.label .en{color:var(--ink-soft);font-style:italic}
+.colophon{position:absolute;left:var(--fx);right:var(--bx);bottom:12%;font-family:var(--mono);font-size:2.2cqi;letter-spacing:.06em;line-height:1.9;color:var(--ink-soft)}
+
+.cover{background:#e9e9e4}
+.cover .ridge{position:absolute;left:var(--bx);width:var(--bw);top:58%}
+.cover .ridge img{width:100%;display:block}
+.cover .title-pg h2{top:var(--by)}
+figcaption{display:flex;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);flex-wrap:wrap}
+figcaption b{color:var(--label);font-weight:500}
+figure.hinge figcaption span{color:var(--paper)}
+.note{font-family:var(--mono);font-size:12px;line-height:1.8;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:20px;max-width:80ch}
+@media (max-width:600px){ .spread.single{width:100%} .meta{text-align:left} header{grid-template-columns:1fr} }
+</style>
+<div class="wrap">
+  <nav class="vols"><span class=on>I · Camino</span> <span>II · Cerro</span> <span>III · Cruz</span></nav>
+  <header>
+    <h1>Camino <i>Vol. I de Cochoapa</i></h1>
+    <div class="meta"><b>Maqueta · Dummy</b><br>17 × 24 cm · 32 págs<br>23 fotografías · 2021<br>Ilford Delta 3200 · medio cuadro</div>
+  </header>
+  <p class="intro">Un zine corto para abrir la caja. La carretera de la costa, la Pemex vacía, el retrovisor, y al final el primer valle verde frente a una página en blanco, que es donde empieza Cerro. <em>A short zine to open the box: the coast road, the empty Pemex, the rear-view mirror, and the first green valley.</em></p>
+  <figure><div class="spread wrapc"><img src="img/cover-wrap.jpg" alt="Portada completa: contraportada, lomo y portada"></div><figcaption><b>Portada · Cover</b><span>contra · lomo 4.5 mm (estimado) · frente</span></figcaption></figure><figure><div class="spread endp"><img src="img/endpaper-R1251.jpg" alt="Rollo R1251 completo en negativo"></div><figcaption><b>Guardas delanteras · Front endpapers</b><span>Rollo 8 · R1251 completo, en negativo</span></figcaption></figure><figure><div class="spread single"><div class="page r "><div class="title-pg"><h2>Camino</h2><p>Pasha · Cochoapa I–III<br>Volumen I</p></div></div></div><figcaption><b>p. 1</b><span>Portadilla · Title page</span></figcaption></figure><figure><div class="spread"><div class="page v "></div><div class="page r "><p class="concept">La carretera nos dejó en la gasolinera y de ahí empezó la subida.<span class="en">The highway left us at the gas station, and the climb began there.</span><span class="gap"></span>Medio cuadro: cada foto es la mitad de lo que vimos.<span class="en">Half frame: every picture is half of what we saw.</span></p><span class="folio">3</span></div></div><figcaption><b>pp. 2–3</b><span>Concepto · Concept</span></figcaption></figure><figure><div class="spread"><div class="page v "></div><div class="page r "><div class="box"><img class="land" src="img/1244-01.jpg" alt="Cochoapa, Rollo 1 · R1244 · F01" loading="lazy"></div><span class="folio">5</span></div></div><figcaption><b>pp. 4–5</b><span>Rollo 1 · R1244 · F01</span></figcaption></figure><figure><div class="spread"><div class="page v "><div class="box"><img class="land" src="img/1244-07.jpg" alt="Cochoapa, Rollo 1 · R1244 · F07" loading="lazy"></div><span class="folio">6</span></div><div class="page r "><div class="box"><img class="land" src="img/1244-16.jpg" alt="Cochoapa, Rollo 1 · R1244 · F16" loading="lazy"></div><span class="folio">7</span></div></div><figcaption><b>pp. 6–7</b><span>Rollo 1 · R1244 · F07  /  Rollo 1 · R1244 · F16</span></figcaption></figure><figure><div class="spread"><div class="page v "><div class="box"><img class="land" src="img/1244-05.jpg" alt="Cochoapa, Rollo 1 · R1244 · F05" loading="lazy"></div><span class="folio">8</span></div><div class="page r "><div class="box"><img class="land" src="img/1244-06.jpg" alt="Cochoapa, Rollo 1 · R1244 · F06" loading="lazy"></div><span class="folio">9</span></div></div><figcaption><b>pp. 8–9</b><span>Rollo 1 · R1244 · F05  /  Rollo 1 · R1244 · F06</span></figcaption></figure><figure><div class="spread"><div class="page v "><div class="box"><img class="land" src="img/1251-03.jpg" alt="Cochoapa, Rollo 8 · R1251 · F03" loading="lazy"></div><span class="folio">10</span></div><div class="page r "><div class="box"><img class="land" src="img/1251-01.jpg" alt="Cochoapa, Rollo 8 · R1251 · F01" loading="lazy"></div><span class="folio">11</span></div></div><figcaption><b>pp. 10–11</b><span>Rollo 8 · R1251 · F03  /  Rollo 8 · R1251 · F01</span></figcaption></figure><figure><div class="spread"><div class="page v "><div class="box"><img class="port" src="img/1244-12.jpg" alt="Cochoapa, Rollo 1 · R1244 · F12" loading="lazy"></div><span class="folio">12</span></div><div class="page r "><div class="box"><img class="land" src="img/1251-04.jpg" alt="Cochoapa, Rollo 8 · R1251 · F04" loading="lazy"></div><span class="folio">13</span></div></div><figcaption><b>pp. 12–13</b><span>Rollo 1 · R1244 · F12  /  Rollo 8 · R1251 · F04</span></figcaption></figure><figure class=hinge><div class="spread"><div class="page v "><div class="box"><img class="port" src="img/1251-08-neg.jpg" alt="Cochoapa, Rollo 8 · R1251 · F08 · negativo" loading="lazy"></div><span class="folio">14</span></div><div class="page r "><div class="box"><img class="port" src="img/1251-08.jpg" alt="Cochoapa, Rollo 8 · R1251 · F08" loading="lazy"></div><span class="folio">15</span></div></div><figcaption><b>pp. 14–15</b><span>La única doble página en negativo: la gasolinera vacía, en negativo y en positivo.</span></figcaption></figure><figure><div class="spread"><div class="page v "><div class="box"><img class="port" src="img/1244-20.jpg" alt="Cochoapa, Rollo 1 · R1244 · F20" loading="lazy"></div><span class="folio">16</span></div><div class="page r "><div class="box"><img class="port" src="img/1244-23.jpg" alt="Cochoapa, Rollo 1 · R1244 · F23" loading="lazy"></div><span class="folio">17</span></div></div><figcaption><b>pp. 16–17</b><span>Rollo 1 · R1244 · F20  /  Rollo 1 · R1244 · F23</span></figcaption></figure><figure><div class="spread"><div class="page v "><div class="box"><img class="port" src="img/1251-06.jpg" alt="Cochoapa, Rollo 8 · R1251 · F06" loading="lazy"></div><span class="folio">18</span></div><div class="page r "><div class="box"><img class="port" src="img/1244-10.jpg" alt="Cochoapa, Rollo 1 · R1244 · F10" loading="lazy"></div><span class="folio">19</span></div></div><figcaption><b>pp. 18–19</b><span>Rollo 8 · R1251 · F06  /  Rollo 1 · R1244 · F10</span></figcaption></figure><figure><div class="spread"><div class="page v "><div class="box"><img class="land" src="img/1244-17.jpg" alt="Cochoapa, Rollo 1 · R1244 · F17" loading="lazy"></div><span class="folio">20</span></div><div class="page r "><div class="box"><img class="land" src="img/1251-02.jpg" alt="Cochoapa, Rollo 8 · R1251 · F02" loading="lazy"></div><span class="folio">21</span></div></div><figcaption><b>pp. 20–21</b><span>Rollo 1 · R1244 · F17  /  Rollo 8 · R1251 · F02</span></figcaption></figure><figure><div class="spread"><div class="page v "><div class="box"><img class="land" src="img/1244-42.jpg" alt="Cochoapa, Rollo 1 · R1244 · F42" loading="lazy"></div><span class="folio">22</span></div><div class="page r "><div class="box"><img class="land" src="img/1244-71.jpg" alt="Cochoapa, Rollo 1 · R1244 · F71" loading="lazy"></div><span class="folio">23</span></div></div><figcaption><b>pp. 22–23</b><span>Rollo 1 · R1244 · F42  /  Rollo 1 · R1244 · F71</span></figcaption></figure><figure><div class="spread"><div class="page v "><div class="box"><img class="port" src="img/1250-68.jpg" alt="Cochoapa, Rollo 7 · R1250 · F68" loading="lazy"></div><span class="folio">24</span></div><div class="page r "><div class="box"><img class="port" src="img/1250-71.jpg" alt="Cochoapa, Rollo 7 · R1250 · F71" loading="lazy"></div><span class="folio">25</span></div></div><figcaption><b>pp. 24–25</b><span>Rollo 7 · R1250 · F68  /  Rollo 7 · R1250 · F71</span></figcaption></figure><figure><div class="spread"><div class="page v "><div class="box"><img class="land" src="img/1248-05.jpg" alt="Cochoapa, Rollo 5 · R1248 · F05" loading="lazy"></div><span class="folio">26</span></div><div class="page r "><div class="box"><img class="port" src="img/1244-15.jpg" alt="Cochoapa, Rollo 1 · R1244 · F15" loading="lazy"></div><span class="folio">27</span></div></div><figcaption><b>pp. 26–27</b><span>Rollo 5 · R1248 · F05  /  Rollo 1 · R1244 · F15</span></figcaption></figure><figure><div class="spread"><div class="page v "><div class="box"><img class="port" src="img/1250-06.jpg" alt="Cochoapa, Rollo 7 · R1250 · F06" loading="lazy"></div><span class="folio">28</span></div><div class="page r "></div></div><figcaption><b>pp. 28–29</b><span>Rollo 7 · R1250 · F06</span></figcaption></figure><figure><div class="spread"><div class="page v "></div><div class="page r "><div class="label"><div class="t">Camino</div>Cochoapa el Grande, Montaña de Guerrero, 2021.<br>La llegada: carretera, gasolineras, camionetas y la reja de la iglesia antes del cerro.<br><span class="en">The way in: highway, gas stations, trucks and the church gate before the mountain.</span><div class="k">Plata en gelatina, escaneo de negativo<br>Ilford Delta 3200 · 35 mm medio cuadro<br>23 fotografías · rollos 1, 5, 7 y 8</div></div><span class="folio">31</span></div></div><figcaption><b>pp. 30–31</b><span>Cédula · Museum label</span></figcaption></figure><figure><div class="spread single left"><div class="page v "><div class="colophon">Camino · Cochoapa vol. I<br>Fotografía y edición: Pasha<br>Tomadas en 2021 · escaneadas en 2026<br>Escaneos sin retoque, recortados al cuadro<br>Guardas: rollos R1251 y R1244 completos, en negativo<br>Primera edición</div></div></div><figcaption><b>p. 32</b><span>Colofón · Colophon</span></figcaption></figure><figure><div class="spread endp"><img src="img/endpaper-R1244.jpg" alt="Rollo R1244 completo en negativo"></div><figcaption><b>Guardas traseras · Back endpapers</b><span>Rollo 1 · R1244 completo, en negativo</span></figcaption></figure>
+  <p class="note">Imágenes de la maqueta a 1800 px. El PDF de imprenta sale de los escaneos originales a 17 × 24 cm con 3 mm de sangrado; cada foto queda arriba de 450 ppp en su caja de 118 mm. Los originales en el SSD no se tocaron.</p>
+</div>
