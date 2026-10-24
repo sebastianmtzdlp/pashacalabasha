@@ -281,3 +281,12 @@ nav{background:color-mix(in srgb,var(--paper) 78%,transparent)}
   .rv{opacity:1;transform:none;transition:none}
   .rv img,.rv canvas{filter:none;transition:none}
 }
+
+/* Grano: ejemplos */
+.gex{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.gcmp{margin:32px 0 0}
+/* Frames: aún en el rollo */
+.frm{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.frm .wide{grid-column:1/-1}
+@media (max-width:980px){.gex{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.frm{grid-template-columns:1fr}}

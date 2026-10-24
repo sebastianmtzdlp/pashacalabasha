@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Frames · Keepr (TE)</title>
+<meta name="description" content="Prueba de estilo: frames.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/keepr/img/icon.png" type="image/png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="te.css">
+</head>
+<body>
+<header class="bar"><div class="w"><a class="logo" href="/keepr/"><i></i>keepr</a><span class="m">v1 · macos 14+</span><nav class="tabs" aria-label="temas"><a href="/keepr/culling">culling</a><a href="/keepr/color">color</a><a href="/keepr/rollos">rollos</a><a href="/keepr/luts">luts</a><a href="grano.html">grano</a><a href="/keepr/sprockets">sprockets</a><a href="frames.html" aria-current="page">frames</a><a href="/keepr/formatos">formatos</a><a href="/keepr/papel">papel</a><a href="/keepr/instantaneas">instantáneas</a><a href="/keepr/posts">posts</a></nav></div></header>
+<main class="w">
+<section class="top">
+  <div class="id"><span class="m">módulo</span><b>06</b><span class="m">frames · export</span></div>
+  <h1>Aún en el rollo.</h1>
+  <p>Cada foto sale como el escaneo de su negativo. Nuevo: deja la película sin cortar y el cuadro sale como una ventana sobre el rollo.</p>
+</section>
+<section class="mod">
+  <div class="mh"><span class="n">01</span><h2>Tira de 3, sin cortar</h2><span class="m">kodak 400tx · escáner · positivo</span></div>
+  <figure class="card"><img src="../img/nuevas/uncut-tira3-escaner-positivo.jpg" alt="Tira de tres cuadros de Kodak 400TX sin cortar, con los cuadros vecinos asomando en las puntas" loading="lazy" width="2000" height="884"><figcaption><b>cuadros 6–8</b><span class="m">asoman el 5 y el 9</span></figcaption></figure>
+</section>
+<section class="mod">
+  <div class="mh"><span class="n">02</span><h2>Un cuadro</h2><span class="m">cuadro 6 · escáner</span></div>
+  <div class="g2">
+    <figure class="card"><img id="sw1" src="../img/nuevas/uncut-cuadro-escaner-positivo.jpg" alt="Cuadro 6 sin cortar, en positivo, sobre el escáner" loading="lazy" width="2000" height="1773"><figcaption><b id="sw1-c">positivo</b><span class="m">aún en el rollo</span></figcaption></figure>
+    <div style="display:grid;gap:20px;align-content:start">
+      <div class="keys" data-swap="sw1" role="group" aria-label="lado">
+        <button class="key" aria-pressed="true" data-src="../img/nuevas/uncut-cuadro-escaner-positivo.jpg" data-alt="Cuadro 6 sin cortar, en positivo">positivo</button>
+        <button class="key" aria-pressed="false" data-src="../img/nuevas/uncut-cuadro-escaner-negativo.jpg" data-alt="Cuadro 6 sin cortar, en negativo">negativo</button>
+        <button class="key" aria-pressed="false" data-src="../img/nuevas/uncut-primer-cuadro-fondo-blanco.jpg" data-alt="Primer cuadro del rollo sobre fondo blanco">cuadro 1 · blanco</button>
+      </div>
+      <div class="spec">
+        <div><span class="m">puntas</span><span class="k">0</span><p>Sin cortes ni margen donde la película sigue.</p></div>
+        <div><span class="m">vecinos</span><span class="k">12 %</span><p>De cada cuadro de al lado asoma un pedazo.</p></div>
+      </div>
+      <div class="spec">
+        <div><span class="m">inclinación</span><span class="k">0°</span><p>Sin cortar, la tira queda plana en el vidrio.</p></div>
+        <div><span class="m">salida</span><span class="k sig">tiff 16</span><p>O JPEG / PNG, a cualquier tamaño.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="mod">
+  <div class="mh"><span class="n">03</span><h2>Antes y ahora</h2><span class="m">recortado · aún en el rollo</span></div>
+  <figure class="card" style="max-width:820px"><img src="../img/nuevas/uncut-comparativa.jpg" alt="Comparativa: recortado contra aún en el rollo, en negativo y positivo, con fondo negro y blanco" loading="lazy" width="2000" height="1998"><figcaption><b>arriba recortado, abajo sin cortar</b><span class="m">negro escáner / blanco</span></figcaption></figure>
+  <div class="tw" style="margin-top:28px"><table>
+    <tr><th>modo</th><th>puntas</th><th>margen</th><th>en el escáner</th></tr>
+    <tr><td>centrado en el cuadro</td><td>cortadas</td><td>todo alrededor</td><td>inclinada, con arco</td></tr>
+    <tr><td>cortado como en el rollo</td><td>cortadas (1–3, 4–6…)</td><td>todo alrededor</td><td>inclinada, con arco</td></tr>
+    <tr><td class="sig">aún en el rollo</td><td>sin cortar</td><td>solo arriba y abajo</td><td>plana</td></tr>
+  </table></div>
+</section>
+<nav class="pg"><a href="/keepr/sprockets"><span class="m">← anterior</span><b>sprockets</b></a><a href="/keepr/formatos"><span class="m">siguiente →</span><b>formatos</b></a></nav>
+<footer class="foot"><span class="m">keepr · hecho por pasha calabasha en méxico</span><span class="m">▸ 36a · keepr 400 · ▸ 36</span></footer>
+</main>
+<script>
+document.querySelectorAll('[data-swap]').forEach(g=>{const img=document.getElementById(g.dataset.swap),cap=document.getElementById(g.dataset.swap+'-c');
+g.querySelectorAll('.key').forEach(k=>k.addEventListener('click',()=>{g.querySelectorAll('.key').forEach(x=>x.setAttribute('aria-pressed',x===k));img.src=k.dataset.src;img.alt=k.dataset.alt;if(cap)cap.textContent=k.textContent}))});
+</script>
+</body>
+</html>
