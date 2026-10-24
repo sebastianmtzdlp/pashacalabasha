@@ -30,7 +30,7 @@
   --serif:Newsreader,Georgia,serif; --sans:Inter,system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 1.0625rem/1.65 var(--sans);-webkit-font-smoothing:antialiased}
 img{display:block;width:100%;height:auto;background:var(--line)}
@@ -119,8 +119,18 @@ footer{padding:0 var(--gut) 32px;color:var(--muted);font-size:.85rem}
 /* páginas */
 .nav a{white-space:nowrap}
 .nav a[aria-current]{text-decoration:underline;text-underline-offset:4px}
-@media(max-width:620px){.nav{font-size:.85rem;padding:14px 16px}.nav nav{gap:.9rem}.nav nav .n-sobre,.nav nav a[href="/familia"],.nav nav .n-series{display:none}}
-@media(max-width:380px){.nav nav{gap:.7rem}.nav{font-size:.8rem}}
+/* en pantallas angostas el menú se abre con un botón para que nada se encime */
+.nav-btn{display:none;font:500 .85rem var(--sans);color:inherit;background:none;border:1px solid currentColor;border-radius:999px;padding:.4em 1em;cursor:pointer}
+@media(max-width:900px){
+  .nav{padding:12px 16px}
+  .mjs .nav-btn{display:block}
+  .mjs .nav nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:4px 16px 12px;background:var(--paper);color:var(--ink);border-bottom:1px solid var(--line);box-shadow:0 12px 24px rgba(23,22,26,.08)}
+  .mjs .nav.open nav{display:flex}
+  .mjs .nav nav a{padding:12px 0;font-size:1.05rem;border-top:1px solid var(--line)}
+  .mjs .nav nav a:first-child{border-top:0}
+  .nav.open{background:var(--paper);color:var(--ink);border-color:var(--line)}
+  html:not(.mjs) .nav nav{overflow-x:auto;gap:1rem;margin-left:16px}
+}
 .page{padding-top:clamp(104px,14vw,170px)}
 .page>.serie{padding-bottom:clamp(56px,8vw,120px)}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,3vw,48px) clamp(16px,2vw,32px);padding:0 var(--gut) clamp(72px,12vw,160px)}
@@ -204,9 +214,19 @@ dialog .lb-pie{position:absolute;left:0;right:0;bottom:14px;text-align:center;co
 
 <header class="nav">
   <a href="/">Pasha Calabasha</a>
-  <nav><a href="/" class="n-series">Series</a><a aria-current="page" href="/fotolibros">Fotolibros</a><a href="/cursos">Cursos</a><a href="/equipo">Equipo</a><a href="/familia">Familia</a><a href="/sobre" class="n-sobre">Sobre mí</a><a href="/contacto">Contacto</a></nav>
+  <button type="button" class="nav-btn" aria-expanded="false" aria-controls="menu">Menú</button>
+  <nav id="menu"><a href="/" class="n-series">Series</a><a aria-current="page" href="/fotolibros">Fotolibros</a><a href="/cursos">Cursos</a><a href="/equipo">Equipo</a><a href="/familia">Familia</a><a href="/sobre" class="n-sobre">Sobre mí</a><a href="/contacto">Contacto</a></nav>
 </header>
 <script>
+document.documentElement.classList.add('mjs');
+(function(){
+  var n=document.querySelector('.nav'),b=n.querySelector('.nav-btn');
+  function cerrar(){n.classList.remove('open');b.setAttribute('aria-expanded','false');b.textContent='Menú'}
+  b.addEventListener('click',function(){var a=!n.classList.contains('open');n.classList.toggle('open',a);b.setAttribute('aria-expanded',a);b.textContent=a?'Cerrar':'Menú'});
+  n.querySelector('nav').addEventListener('click',function(e){if(e.target.closest('a'))cerrar()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')cerrar()});
+  document.addEventListener('click',function(e){if(!n.contains(e.target))cerrar()});
+})();
 document.addEventListener('DOMContentLoaded',function(){
   var n=document.querySelector('.nav'),c=document.querySelector('.cover');
   if(!c)return;
@@ -248,6 +268,7 @@ document.addEventListener('DOMContentLoaded',function(){
     </article>
   </div>
 </section>
+
 
 </main>
 
