@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Galería de cliente: no aparece en buscadores ni en el sitemap -->
+<meta name="robots" content="noindex, nofollow">
+<title>Muestra — Galería · Pasha Calabasha</title>
+<meta property="og:title" content="Muestra — Galería de Pasha Calabasha">
+<meta property="og:description" content="Tu galería está lista.">
+<meta property="og:image" content="https://pashacalabasha.com/img/6071.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4f1ea; --ink:#17161a; --muted:#77726a; --line:#dcd6c9; --amber:#c98a2b;
+  --gut:clamp(16px,4vw,56px);
+  --serif:Newsreader,Georgia,serif; --sans:Inter,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+img{display:block;width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+/* aviso de borrador */
+.borrador{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:40;background:var(--ink);color:var(--paper);font-size:.8rem;padding:8px 14px;border-radius:99px;max-width:calc(100% - 32px);text-align:center}
+
+/* portada */
+.portada{position:relative;height:100svh;min-height:520px;color:#fff;overflow:hidden;display:grid;place-items:center;text-align:center}
+.portada img{position:absolute;inset:0;height:100%;object-fit:cover}
+.portada::after{content:"";position:absolute;inset:0;background:rgba(10,10,8,.38)}
+.portada .txt{position:relative;z-index:2;padding:0 var(--gut)}
+.portada h1{margin:0;font:300 clamp(3rem,11vw,8.5rem)/.95 var(--serif);letter-spacing:.02em;text-transform:uppercase}
+.portada p{margin:18px 0 0;font-size:.85rem;letter-spacing:.24em;text-transform:uppercase}
+.portada a.ver{display:inline-block;margin-top:36px;padding:12px 28px;border:1px solid rgba(255,255,255,.8);text-decoration:none;font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;transition:background .2s,color .2s}
+.portada a.ver:hover{background:#fff;color:var(--ink)}
+.firma{position:absolute;z-index:2;left:0;right:0;bottom:28px;font:italic 300 1.15rem var(--serif)}
+
+/* barra */
+.barra{position:sticky;top:0;z-index:20;background:rgba(244,241,234,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.barra .fila{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px var(--gut)}
+.barra .nombre{font:400 1.05rem var(--serif);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barra .nombre small{display:block;font:400 .72rem var(--sans);letter-spacing:.06em;text-transform:none;color:var(--muted)}
+.acciones{display:flex;gap:18px;align-items:center}
+.acciones button,.acciones a{display:flex;align-items:center;gap:6px;font-size:.82rem;text-decoration:none}
+.acciones .lbl{display:none}
+@media(min-width:760px){.acciones .lbl{display:inline}}
+.acciones .cuenta{font-size:.72rem;color:var(--muted)}
+.escenas{display:flex;gap:26px;padding:0 var(--gut);overflow-x:auto;scrollbar-width:none}
+.escenas::-webkit-scrollbar{display:none}
+.escenas button{padding:10px 0 12px;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid transparent;white-space:nowrap}
+.escenas button[aria-pressed=true]{color:var(--ink);border-color:var(--ink)}
+
+/* rejilla */
+main{padding:clamp(24px,4vw,48px) var(--gut) 120px}
+.escena{margin-bottom:clamp(48px,8vw,96px)}
+.escena h2{margin:0 0 clamp(18px,3vw,32px);font:300 clamp(1.8rem,4vw,2.8rem)/1 var(--serif);text-align:center}
+.rejilla{columns:3 300px;column-gap:clamp(6px,1vw,14px)}
+.foto{position:relative;break-inside:avoid;margin-bottom:clamp(6px,1vw,14px);background:var(--line);cursor:zoom-in}
+.foto img{transition:opacity .3s}
+.foto .over{position:absolute;inset:auto 0 0 0;display:flex;justify-content:flex-end;gap:4px;padding:8px;background:linear-gradient(to top,rgba(0,0,0,.35),transparent);opacity:0;transition:opacity .2s}
+.foto:hover .over,.foto:focus-within .over,.foto.fav .over{opacity:1}
+@media(hover:none){.foto .over{opacity:1}}
+.over button,.over a{width:34px;height:34px;display:grid;place-items:center;color:#fff;border-radius:50%}
+.over button:hover,.over a:hover{background:rgba(255,255,255,.18)}
+.foto.fav .corazon svg{fill:#fff}
+.vacio{text-align:center;color:var(--muted);padding:80px 0;font:italic 300 1.3rem var(--serif)}
+
+/* visor */
+.visor{position:fixed;inset:0;z-index:50;background:#0e0e0c;color:#f4f1ea;display:none;grid-template-rows:auto 1fr auto}
+.visor.abierto{display:grid}
+.visor header{display:flex;justify-content:space-between;align-items:center;padding:14px var(--gut);font-size:.8rem}
+.visor header .acciones{gap:22px}
+.visor .marco{position:relative;display:grid;place-items:center;min-height:0;padding:0 clamp(8px,6vw,80px)}
+.visor .marco img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;user-select:none}
+.visor .flecha{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;display:grid;place-items:center;border-radius:50%}
+.visor .flecha:hover{background:rgba(255,255,255,.1)}
+.visor .ant{left:8px}.visor .sig{right:8px}
+@media(max-width:620px){.visor .flecha{display:none}}
+.visor footer{padding:12px var(--gut);text-align:center;font-size:.75rem;color:#a39e94;letter-spacing:.1em}
+.visor.fav .corazon svg{fill:currentColor}
+
+/* pie */
+.pie{border-top:1px solid var(--line);padding:48px var(--gut);text-align:center;color:var(--muted);font-size:.85rem}
+.pie strong{display:block;color:var(--ink);font:300 1.6rem var(--serif);margin-bottom:6px}
+.toast{position:fixed;left:50%;top:20px;transform:translate(-50%,-40px);opacity:0;z-index:60;background:var(--ink);color:var(--paper);font-size:.82rem;padding:10px 16px;border-radius:6px;transition:all .25s}
+.toast.si{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-9A5 5 0 0 1 12 6a5 5 0 0 1 9.2 5c-2.2 4.6-9.2 9-9.2 9z"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-l" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+</svg>
+
+<header class="portada">
+  <img id="portada" src="" alt="">
+  <div class="txt">
+    <h1 id="titulo"></h1>
+    <p id="fecha"></p>
+    <a class="ver" href="#galeria">Ver galería</a>
+  </div>
+  <div class="firma">Pasha Calabasha</div>
+</header>
+
+<div class="barra" id="galeria">
+  <div class="fila">
+    <div class="nombre"><span id="titulo2"></span><small id="sub"></small></div>
+    <div class="acciones">
+      <button id="verFavs" aria-pressed="false" title="Ver favoritas"><svg class="ico"><use href="#i-heart"/></svg><span class="lbl">Favoritas</span> <span class="cuenta" id="nFavs">0</span></button>
+      <button id="presentar" title="Presentación"><svg class="ico"><use href="#i-play"/></svg><span class="lbl">Presentación</span></button>
+      <a id="todo" href="#" title="Descargar todas"><svg class="ico"><use href="#i-down"/></svg><span class="lbl">Descargar todo</span></a>
+      <button id="compartir" title="Copiar enlace"><svg class="ico"><use href="#i-share"/></svg><span class="lbl">Compartir</span></button>
+    </div>
+  </div>
+  <nav class="escenas" id="escenas" aria-label="Escenas"></nav>
+</div>
+
+<main id="contenido"></main>
+
+<footer class="pie">
+  <strong>Pasha Calabasha</strong>
+  Fotografía · Coatepec, Veracruz · <a href="/contacto">Contacto</a>
+</footer>
+
+<div class="visor" id="visor" role="dialog" aria-modal="true" aria-label="Visor de fotos">
+  <header>
+    <span id="vCuenta"></span>
+    <div class="acciones">
+      <button class="corazon" id="vFav" title="Favorita"><svg class="ico"><use href="#i-heart"/></svg></button>
+      <a id="vDown" href="#" download title="Descargar"><svg class="ico"><use href="#i-down"/></svg></a>
+      <button id="vPlay" title="Presentación"><svg class="ico"><use href="#i-play"/></svg></button>
+      <button id="vCerrar" title="Cerrar (Esc)"><svg class="ico"><use href="#i-x"/></svg></button>
+    </div>
+  </header>
+  <div class="marco">
+    <button class="flecha ant" id="vAnt" title="Anterior"><svg class="ico"><use href="#i-l"/></svg></button>
+    <img id="vImg" src="" alt="">
+    <button class="flecha sig" id="vSig" title="Siguiente"><svg class="ico"><use href="#i-r"/></svg></button>
+  </div>
+  <footer id="vEscena"></footer>
+</div>
+
+<div class="borrador">Borrador: galería de muestra con fotos del portafolio y textos provisionales.</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== Datos de la galería: para un cliente nuevo, copia esta carpeta y cambia solo este bloque =====
+   - foto: nombre del archivo en la carpeta de fotos (sin extensión). Se usa .webp para ver y .jpg para descargar.
+   - zip: enlace al .zip con todas las fotos (Google Drive, Dropbox, etc.). Vacío = se esconde el botón. */
+var GALERIA = {
+  titulo: "Muestra",
+  fecha: "Octubre 2026",
+  sub: "Coatepec, Veracruz",
+  carpeta: "/img/",
+  portada: "6071",
+  zip: "",
+  escenas: [
+    {nombre: "Selva y cascada", fotos: ["5991","5956","5998","6181","5961","6000","5983","5985"]},
+    {nombre: "Pueblo",          fotos: ["6462","6530","6473","6489","6531","6276","6412","6284"]},
+    {nombre: "Templos",         fotos: ["6674","6683","6697","6687","6704","6709","6715","6726","6680"]}
+  ]
+};
+/* ===== fin de los datos ===== */
+
+(function(){
+  var G = GALERIA, $ = function(id){return document.getElementById(id)};
+  var clave = "fav:" + location.pathname;
+  var favs = {};
+  try { favs = JSON.parse(localStorage.getItem(clave) || "{}") } catch(e) {}
+  function guardar(){ try { localStorage.setItem(clave, JSON.stringify(favs)) } catch(e) {} }
+
+  // lista plana de fotos, en orden, con su escena
+  var todas = [];
+  G.escenas.forEach(function(e, i){ e.fotos.forEach(function(f){ todas.push({f: f, e: i}) }) });
+  var ver = "webp", bajar = "jpg";
+  function src(f, ext){ return G.carpeta + f + "." + ext }
+  function nombreArchivo(f){ return G.titulo.toLowerCase().replace(/[^a-z0-9]+/g, "-") + "-" + f + ".jpg" }
+
+  // portada y textos
+  $("portada").src = src(G.portada, ver);
+  $("titulo").textContent = G.titulo;
+  $("titulo2").textContent = G.titulo;
+  $("fecha").textContent = G.fecha + (G.sub ? " · " + G.sub : "");
+  $("sub").textContent = todas.length + " fotos · " + G.fecha;
+  if (G.zip) $("todo").href = G.zip; else $("todo").style.display = "none";
+
+  // escenas y rejilla
+  var filtro = "todas", soloFavs = false, lista = [];
+  var nav = $("escenas");
+  function botonEscena(valor, texto){
+    var b = document.createElement("button");
+    b.textContent = texto; b.dataset.v = valor;
+    b.onclick = function(){ filtro = valor; soloFavs = false; pintar(); };
+    nav.appendChild(b);
+  }
+  botonEscena("todas", "Todas");
+  G.escenas.forEach(function(e, i){ botonEscena(String(i), e.nombre) });
+
+  function tarjeta(item, idx){
+    var d = document.createElement("div");
+    d.className = "foto" + (favs[item.f] ? " fav" : "");
+    d.tabIndex = 0;
+    d.innerHTML = '<img loading="lazy" src="' + src(item.f, ver) + '" alt="Foto ' + item.f + '">'
+      + '<div class="over"><button class="corazon" title="Favorita"><svg class="ico"><use href="#i-heart"/></svg></button>'
+      + '<a href="' + src(item.f, bajar) + '" download="' + nombreArchivo(item.f) + '" title="Descargar"><svg class="ico"><use href="#i-down"/></svg></a></div>';
+    d.onclick = function(ev){ if (!ev.target.closest(".over")) abrir(idx) };
+    d.onkeydown = function(ev){ if (ev.key === "Enter") abrir(idx) };
+    d.querySelector(".corazon").onclick = function(ev){ ev.stopPropagation(); alternar(item.f); };
+    return d;
+  }
+
+  function pintar(){
+    [].forEach.call(nav.children, function(b){ b.setAttribute("aria-pressed", !soloFavs && b.dataset.v === filtro) });
+    $("verFavs").setAttribute("aria-pressed", soloFavs);
+    var main = $("contenido"); main.innerHTML = ""; lista = [];
+    if (soloFavs) {
+      lista = todas.filter(function(t){ return favs[t.f] });
+      if (!lista.length) { main.innerHTML = '<p class="vacio">Aún no marcas favoritas. Toca el corazón en las fotos que más te gusten.</p>'; return }
+      var sec = document.createElement("section"); sec.className = "escena";
+      sec.innerHTML = '<h2>Tus favoritas</h2><div class="rejilla"></div>';
+      lista.forEach(function(t, i){ sec.lastChild.appendChild(tarjeta(t, i)) });
+      main.appendChild(sec); return;
+    }
+    G.escenas.forEach(function(e, i){
+      if (filtro !== "todas" && filtro !== String(i)) return;
+      var sec = document.createElement("section"); sec.className = "escena";
+      sec.innerHTML = '<h2></h2><div class="rejilla"></div>';
+      sec.firstChild.textContent = e.nombre;
+      e.fotos.forEach(function(f){ var t = {f: f, e: i}; sec.lastChild.appendChild(tarjeta(t, lista.length)); lista.push(t) });
+      main.appendChild(sec);
+    });
+  }
+
+  function alternar(f){
+    if (favs[f]) delete favs[f]; else favs[f] = 1;
+    guardar(); contar();
+    document.querySelectorAll(".foto").forEach(function(d){
+      if (d.querySelector("a").href.indexOf("/" + f + ".") > -1) d.classList.toggle("fav", !!favs[f]);
+    });
+    if (visor.classList.contains("abierto")) visor.classList.toggle("fav", !!favs[lista[actual].f]);
+  }
+  function contar(){ $("nFavs").textContent = Object.keys(favs).length }
+  $("verFavs").onclick = function(){ soloFavs = !soloFavs; pintar(); };
+
+  // visor
+  var visor = $("visor"), actual = 0, reloj = null;
+  function mostrar(){
+    var t = lista[actual];
+    $("vImg").src = src(t.f, ver);
+    $("vImg").alt = "Foto " + t.f;
+    $("vDown").href = src(t.f, bajar);
+    $("vDown").setAttribute("download", nombreArchivo(t.f));
+    $("vCuenta").textContent = (actual + 1) + " / " + lista.length;
+    $("vEscena").textContent = G.escenas[t.e].nombre;
+    visor.classList.toggle("fav", !!favs[t.f]);
+    var sig = lista[(actual + 1) % lista.length]; (new Image()).src = src(sig.f, ver);
+  }
+  function abrir(i){ actual = i; visor.classList.add("abierto"); document.body.style.overflow = "hidden"; mostrar(); $("vCerrar").focus(); }
+  function cerrar(){ visor.classList.remove("abierto"); document.body.style.overflow = ""; parar(); }
+  function mover(n){ actual = (actual + n + lista.length) % lista.length; mostrar(); }
+  function parar(){ clearInterval(reloj); reloj = null; $("vPlay").firstChild.firstChild.setAttribute("href", "#i-play"); }
+  function presentar(){
+    if (reloj) return parar();
+    reloj = setInterval(function(){ mover(1) }, 3500);
+    $("vPlay").firstChild.firstChild.setAttribute("href", "#i-pause");
+  }
+  $("vAnt").onclick = function(){ mover(-1) };
+  $("vSig").onclick = function(){ mover(1) };
+  $("vCerrar").onclick = cerrar;
+  $("vFav").onclick = function(){ alternar(lista[actual].f) };
+  $("vPlay").onclick = presentar;
+  $("presentar").onclick = function(){ if (!lista.length) return; abrir(0); presentar(); };
+  document.addEventListener("keydown", function(e){
+    if (!visor.classList.contains("abierto")) return;
+    if (e.key === "Escape") cerrar();
+    if (e.key === "ArrowLeft") mover(-1);
+    if (e.key === "ArrowRight") mover(1);
+  });
+  var x0 = null;
+  visor.addEventListener("touchstart", function(e){ x0 = e.touches[0].clientX }, {passive: true});
+  visor.addEventListener("touchend", function(e){
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 50) mover(dx < 0 ? 1 : -1);
+  });
+
+  // compartir
+  function aviso(t){ var el = $("toast"); el.textContent = t; el.classList.add("si"); setTimeout(function(){ el.classList.remove("si") }, 2200) }
+  $("compartir").onclick = function(){
+    var url = location.origin + location.pathname;
+    if (navigator.share) navigator.share({title: G.titulo, url: url}).catch(function(){});
+    else if (navigator.clipboard) navigator.clipboard.writeText(url).then(function(){ aviso("Enlace copiado") });
+    else aviso(url);
+  };
+
+  contar(); pintar();
+})();
+</script>
+</body>
+</html>
