@@ -159,23 +159,58 @@ main{padding:clamp(24px,4vw,48px) var(--gut) 120px}
 <div class="toast" id="toast"></div>
 
 <script>
-/* ===== Datos de la galería: para un cliente nuevo, copia esta carpeta y cambia solo este bloque =====
-   - foto: nombre del archivo en la carpeta de fotos (sin extensión). Se usa .webp para ver y .jpg para descargar.
-   - zip: enlace al .zip con todas las fotos (Google Drive, Dropbox, etc.). Vacío = se esconde el botón. */
+/* Datos de la galería. No editar aquí: cambia galeria.json y corre
+   python3 _tools/galeria.py rehacer muestra */
 var GALERIA = {
-  titulo: "Muestra",
-  fecha: "Octubre 2026",
-  sub: "Coatepec, Veracruz",
-  carpeta: "/img/",
-  portada: "6071",
-  zip: "",
-  escenas: [
-    {nombre: "Selva y cascada", fotos: ["5991","5956","5998","6181","5961","6000","5983","5985"]},
-    {nombre: "Pueblo",          fotos: ["6462","6530","6473","6489","6531","6276","6412","6284"]},
-    {nombre: "Templos",         fotos: ["6674","6683","6697","6687","6704","6709","6715","6726","6680"]}
+  "titulo": "Muestra",
+  "fecha": "Octubre 2026",
+  "sub": "Coatepec, Veracruz",
+  "carpeta": "/img/",
+  "portada": "6071",
+  "zip": "",
+  "escenas": [
+    {
+      "nombre": "Selva y cascada",
+      "fotos": [
+        "5991",
+        "5956",
+        "5998",
+        "6181",
+        "5961",
+        "6000",
+        "5983",
+        "5985"
+      ]
+    },
+    {
+      "nombre": "Pueblo",
+      "fotos": [
+        "6462",
+        "6530",
+        "6473",
+        "6489",
+        "6531",
+        "6276",
+        "6412",
+        "6284"
+      ]
+    },
+    {
+      "nombre": "Templos",
+      "fotos": [
+        "6674",
+        "6683",
+        "6697",
+        "6687",
+        "6704",
+        "6709",
+        "6715",
+        "6726",
+        "6680"
+      ]
+    }
   ]
 };
-/* ===== fin de los datos ===== */
 
 (function(){
   var G = GALERIA, $ = function(id){return document.getElementById(id)};
@@ -197,7 +232,8 @@ var GALERIA = {
   $("titulo2").textContent = G.titulo;
   $("fecha").textContent = G.fecha + (G.sub ? " · " + G.sub : "");
   $("sub").textContent = todas.length + " fotos · " + G.fecha;
-  if (G.zip) $("todo").href = G.zip; else $("todo").style.display = "none";
+  if (G.zip) { $("todo").href = G.zip; $("todo").target = "_blank"; $("todo").rel = "noopener"; }
+  else $("todo").onclick = function(e){ e.preventDefault(); aviso("La descarga en alta resolución se agrega pronto") };
 
   // escenas y rejilla
   var filtro = "todas", soloFavs = false, lista = [];

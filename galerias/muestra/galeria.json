@@ -1,0 +1,14 @@
+{
+  "titulo": "Muestra",
+  "fecha": "Octubre 2026",
+  "sub": "Coatepec, Veracruz",
+  "carpeta": "/img/",
+  "portada": "6071",
+  "zip": "",
+  "borrador": "Borrador: galería de muestra con fotos del portafolio y textos provisionales.",
+  "escenas": [
+    {"nombre": "Selva y cascada", "fotos": ["5991","5956","5998","6181","5961","6000","5983","5985"]},
+    {"nombre": "Pueblo", "fotos": ["6462","6530","6473","6489","6531","6276","6412","6284"]},
+    {"nombre": "Templos", "fotos": ["6674","6683","6697","6687","6704","6709","6715","6726","6680"]}
+  ]
+}
